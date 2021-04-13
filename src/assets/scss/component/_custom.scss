@@ -1,0 +1,180 @@
+// 列表按钮操作区
+.operate-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 14px 0 14px -6px;
+    .el-button {
+        &.add {
+            height: 30px;
+            padding: 0 24px;
+            border: none;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            background-color: $mainblue;
+            &:hover,
+            &:focus {
+                background-color: $mainblue;
+                box-shadow: 0px 10px 10px -4px rgba(87, 85, 179, 0.15);
+            }
+        }
+        &.normal {
+            height: 30px;
+            padding: 0 40px;
+            border: none;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 30px;
+            text-align: center;
+            color: $mainblue;
+            border: 1px solid #E9ECF5;
+            background-color: #fff;
+
+            &:hover,
+            &:focus {
+                background-color: #fff;
+                box-shadow: 0px 10px 10px -4px rgba(147, 147, 176, 0.07);
+            }
+        }
+    }
+    .double {
+        display: flex;
+        align-items: center;
+        &+.el-button {
+            margin-left: 24px;
+        }
+        &+.double {
+            margin-left: 24px;
+        }
+        .add,
+        .normal {
+            padding: 0 20px;
+            &:first-of-type {
+                position: relative;
+                border-radius: 15px 0 0 15px;
+                &::after {
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    content: '';
+                    width: 1px;
+                    height: 16px;
+                    background-color: #fff;
+                    opacity: 0.3;
+                }
+            }
+            &:last-of-type {
+                margin-left: 0;
+                border-radius: 0 15px 15px 0;
+            }
+        }
+        .normal {
+            &:first-of-type {
+                border-right: none;
+                &::after {
+                    background-color: #E9ECF5;
+                }
+            }
+            &:last-of-type {
+                border-left: none;
+            }
+        }
+    }
+    .item {
+        margin: 6px;
+    }
+    .btn-container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .round-input {
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        width: 240px;
+        height: 32px;
+        padding: 0 5px;
+        margin-left: 36px;
+        border-radius: 16px;
+        border: 1px solid #C8C8CB;
+        background-color: #fff;
+
+        &:hover {
+            border-color: #F1B7D0;
+        }
+
+        .iconfont {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 30px;
+            height: 30px;
+            font-size: 14px;
+            color: #C8C8CB;
+        }
+
+        .search {
+            flex: 1;
+            font-size: 12px;
+            color: #222530;
+
+            &::placeholder {
+                font-size: 12px;
+                color: #909297;
+            }
+        }
+
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 40px;
+            height: 24px;
+            border-radius: 16px;
+            background-color: #5755B3;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+        }
+    }
+}
+// 表格按钮操作区
+.operate .cell {
+    display: flex;
+    align-items: center;
+    .circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        border-radius: 50%;
+        background-color: #fff;
+        border: 1px solid #E8E9EA;
+        >span {
+            display: flex;
+        }
+        & + .circle {
+            margin-left: 20px;
+        }
+        &:hover {
+            border-color: $mainpink;
+        }
+        &.is-disabled {
+            opacity: 0.3;
+        }
+    }
+}
+
