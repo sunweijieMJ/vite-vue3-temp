@@ -20,4 +20,5 @@ messageType.map((item) => {
         return customMessage(options);
     };
 });
-export const message = customMessage;
+
+export default customMessage;

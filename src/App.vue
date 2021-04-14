@@ -1,19 +1,13 @@
 <template>
-  <div id="root">
-    <router-view />
-    <modify-pass />
-    <serve-error />
-  </div>
+    <div id="root">
+        <router-view />
+    </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { ModifyPass, ServeError } from '@/components/basic';
 
 export default defineComponent({
-    name: 'App',
-    components: {
-        ModifyPass, ServeError
-    }
+    name: 'App'
 });
 </script>
 <style lang="scss">
@@ -24,7 +18,7 @@ export default defineComponent({
     // 自定义样式
     @import './assets/scss/component/_custom.scss';
     // 覆盖element样式
-    // @import './assets/scss/component/_element.scss';
+    @import './assets/scss/component/_element.scss';
     // 修改element变量&图标
     @import './assets/theme/_element-theme.scss';
 

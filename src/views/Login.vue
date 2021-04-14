@@ -35,7 +35,6 @@
 </template>
 <script lang="ts">
 import { defineComponent, inject, onMounted, ref, reactive } from 'vue';
-import { useStore } from 'vuex';
 import { IMessage } from 'element-plus/lib/el-message/src/types';
 import md5 from 'js-md5';
 import { basicApi } from '@/api';
@@ -45,7 +44,6 @@ export default defineComponent({
     name: 'Login',
     setup() {
         const $msg = inject('$message') as IMessage;
-        const $store = useStore();
 
         const validatePass = (rule: unknown, value: string, callback: (args?: unknown) => void) => {
             if (value.length < 6) {
@@ -84,8 +82,6 @@ export default defineComponent({
 
         // 处理登录
         const handleLogin = () => {
-            $store.dispatch('basic/toggleModifyPass', {status: true});
-            return;
             (formRef as any).value.validate((valid: boolean) => {
                 if (valid) {
                     basicApi.authLogin({
@@ -113,7 +109,7 @@ export default defineComponent({
         };
 
         onMounted(() => {
-            $msg({ type: 'success', message: '登录成功' });
+            $msg.success('登录成功');
             getGraphicCode();
         });
 

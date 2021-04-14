@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import Layout from '@/layout/index.vue';
 import { i18n } from '@/plugin';
 
 // 获取i18n对象
@@ -20,11 +21,11 @@ const routes = [
         }
     },
     {
-        path: '/home',
-        name: 'Home',
-        component: () => import('@/views/Home.vue'),
+        path: '/layout',
+        name: 'Layout',
+        component: Layout,
         meta: {
-            title: 'Home'
+            title: 'Layout'
         }
     },
     {

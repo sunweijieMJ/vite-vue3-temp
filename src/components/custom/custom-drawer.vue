@@ -1,27 +1,27 @@
 <template>
     <el-drawer
-        v-if="currentValue"
-        v-model:visible="currentValue"
+        v-model="currentValue"
+        :custom-class="`custom-drawer ${customClass}`"
+        :size="size"
         :direction="direction"
         :modal="modal"
-        custom-class="custom-drawer"
         :append-to-body="appendToBody"
-        :close-on-click-modal="closeOnClickModal"
         :close-on-press-escape="closeOnPressEscape"
         :destroy-on-close="destroyOnClose"
         :before-close="beforeClose"
+        :with-header="withHeader"
         @open="$emit('openDialog')"
         @close="$emit('closeDialog')"
     >
         <template #title>
-            <slot name="header" class="header">
-                <i class="iconfont iconjuxing" />
-                <h3 class="title">{{ title }}</h3>
+            <slot name="header">
+                <div class="header">
+                    <i class="iconfont iconjuxing" />
+                    <h3 class="title">{{ title }}</h3>
+                </div>
             </slot>
         </template>
-        <div class="custom-drawer-container">
-            <slot />
-        </div>
+        <slot />
     </el-drawer>
 </template>
 <script lang="ts">
@@ -43,9 +43,10 @@ export default defineComponent({
             type: String,
             default: ''
         },
-        ifConfirm: {
-            type: Boolean,
-            default: true
+        // Drawer 窗体的大小
+        size: {
+            type: String,
+            default: '30%'
         },
         // 是否需要遮罩层
         modal: {
@@ -57,20 +58,8 @@ export default defineComponent({
             type: String,
             default: 'rtl'
         },
-        showCancel: {
-            type: Boolean,
-            default: true
-        },
-        showConfirm: {
-            type: Boolean,
-            default: true
-        },
         // Drawer 自身是否插入至 body 元素上。嵌套的 Drawer 必须指定该属性并赋值为 true
         appendToBody: {
-            type: Boolean,
-            default: false
-        },
-        closeOnClickModal: {
             type: Boolean,
             default: false
         },
@@ -82,9 +71,14 @@ export default defineComponent({
         // 控制是否在关闭 Drawer 之后将子元素全部销毁
         destroyOnClose: {
             type: Boolean,
-            default: false
+            default: true
         },
-        // 关闭前的回调，会暂停 Drawer 的关闭
+        // 控制是否显示 header 栏
+        withHeader: {
+            type: Boolean,
+            default: true
+        },
+        // 关闭前的回调,会暂停 Drawer 的关闭
         beforeClose: {
             type: Function,
             default: null
@@ -105,9 +99,6 @@ export default defineComponent({
 </script>
 <style lang="scss">
     .custom-drawer {
-        height: 100vh;
-        box-sizing: border-box;
-        margin: 0 auto !important;
         .el-drawer__header {
             padding: 0;
             margin-bottom: 16px !important;
@@ -138,30 +129,7 @@ export default defineComponent({
             }
         }
         .el-drawer__body {
-            overflow: auto;  // 这里设置才能body中的元素才能滚动
-            padding: 0;
-            .custom-drawer-container {
-                height: 100% !important;
-            }
-            // overflow: auto;
-            // position: relative;
-            // padding-bottom: 72px;
-            // .footer {
-            //     position: absolute;
-            //     width: 100%;
-            //     height: 72px;
-            //     bottom: 0;
-            //     box-sizing: border-box;
-            //     display: flex;
-            //     align-items: center;
-            //     justify-content: center;
-            //     padding:18px 30px;
-            //     border-radius: 0px 0px 6px 6px;
-            //     background: rgba(135,134,191, 0.05);
-            //     .confirm {
-            //         margin-left: 24px;
-            //     }
-            // }
+            overflow-y: auto;
         }
     }
 </style>

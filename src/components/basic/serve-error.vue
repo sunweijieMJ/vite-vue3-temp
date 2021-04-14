@@ -1,6 +1,6 @@
 <template>
     <custom-dialog
-        v-model="errorPage.status"
+        v-model:visible="errorPage.status"
         custom-class="serve-error"
         :title="errorPage.type"
         :show-confirm="false"

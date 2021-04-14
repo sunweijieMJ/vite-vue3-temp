@@ -2,7 +2,7 @@
     <el-image class="custom-image"
         :src="currentSrc" :alt="alt" :fit="fit" :referrer-policy="referrerPolicy"
         :lazy="lazy" :scroll-container="scrollContainer"
-        :preview-src-list="srcList" :hide-on-click-modal="hideOnClickModal" :z-index="zIndex"
+        :preview-src-list="previewSrcList" :hide-on-click-modal="hideOnClickModal" :z-index="zIndex"
         @load="load" @error="error"
     >
         <template #placeholder class="image-slot">

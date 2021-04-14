@@ -22,7 +22,7 @@
         <slot />
         <template #footer>
             <slot name="footer">
-                <div class="footer">
+                <div class="footer-box">
                     <el-button v-if="showCancel" class="btn cancel" @click="$emit('cancel')">{{ cancelText }}</el-button>
                     <el-button v-if="showConfirm" class="btn confirm" @click="$emit('confirm')">{{ confirmText }}</el-button>
                 </div>
@@ -37,7 +37,8 @@ export default defineComponent({
     name: 'CustomDialog',
     props: {
         visible: {
-            type: Boolean
+            type: Boolean,
+            required: true
         },
         customClass: {
             type: String,
@@ -50,10 +51,6 @@ export default defineComponent({
         width: {
             type: String,
             default: '840px'
-        },
-        ifConfirm: {
-            type: Boolean,
-            default: true
         },
         cancelText: {
             type: String,
@@ -85,7 +82,7 @@ export default defineComponent({
         },
         destroyOnClose: {
             type: Boolean,
-            default: false
+            default: true
         },
         beforeClose: {
             type: Function,
@@ -144,11 +141,11 @@ export default defineComponent({
         .el-dialog__body {
             padding: 0;
             flex: 1;
-            overflow-y: auto;  // 必须在这里加
+            overflow-y: auto;
         }
         .el-dialog__footer {
             padding: 0;
-            .footer {
+            .footer-box {
                 box-sizing: border-box;
                 display: flex;
                 align-items: center;

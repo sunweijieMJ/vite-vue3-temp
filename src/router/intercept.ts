@@ -15,7 +15,7 @@ router.beforeEach(async(to, from, next) => {
     // 判断是否登录
     if (token) {
         if (whiteList.includes(to.path)) {
-            next({ name: 'Home' });
+            next({ name: 'Layout' });
             NProgress.done();
         } else {
             next();

@@ -1,16 +1,17 @@
 <template>
-    <div ref="myChart" class="custom-chart" />
+    <div ref="chartRef" class="custom-chart" />
 </template>
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent, PropType, ref, onMounted } from 'vue';
 import { echarts } from '@/plugin';
+import { ECOption } from '@/plugin/echarts';
 
 export default defineComponent({
     name: 'CustomChart',
     props: {
         // 配置项
         options: {
-            type: Object,
+            type: Object as PropType<ECOption>,
             default: null
         },
         // 主题
@@ -25,12 +26,12 @@ export default defineComponent({
         }
     },
     setup(props) {
-        let myChart: any = null;
-        const chartRef = ref(null);
+        let myChart;
+        const chartRef = ref<HTMLElement|null>(null);
 
         const draw = () => {
             // 实例化
-            myChart = echarts.init(chartRef, props.theme, props.opts);
+            myChart = echarts.init((chartRef.value as HTMLElement), props.theme, props.opts);
 
             // 绘制
             myChart.setOption(props.options);
@@ -39,6 +40,16 @@ export default defineComponent({
         onMounted(() => {
             draw();
         });
+
+        return {
+            chartRef
+        };
     }
 });
 </script>
+<style lang="scss" scoped>
+    .custom-chart {
+        width: 500px;
+        height: 400px;
+    }
+</style>

@@ -1,38 +1,22 @@
 <template>
-  <div class="not-found">
-    <h2 class="logo">
-      <svg
-        class="icon"
-        aria-hidden="true"
-        width="60px"
-        height="60px"
-      >
-        <use xlink:href="#iconLogo" />
-      </svg>
-    </h2>
-    <div class="container">
-      <div class="box">
-        <img
-          class="img"
-          src="../../static/img/404.png"
-          alt=""
-        >
-        <h4 class="title">
-          Sorry~
-        </h4>
-        <p class="desc">
-          The page is having a rest
-        </p>
-        <a
-          class="back"
-          href="/"
-        >
-          <span class="text">返回首页</span>
-          <i class="iconfont iconarrow_right" />
-        </a>
-      </div>
+    <div class="not-found">
+        <h2 class="logo">
+            <svg class="icon" aria-hidden="true" width="60px" height="60px">
+                <use xlink:href="#iconLogo" />
+            </svg>
+        </h2>
+        <div class="container">
+            <div class="box">
+                <img class="img" src="../../static/img/404.png" alt="">
+                <h4 class="title"> Sorry~</h4>
+                <p class="desc">The page is having a rest</p>
+                <a class="back" href="/">
+                    <span class="text">返回首页</span>
+                    <i class="iconfont iconarrow_right" />
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';

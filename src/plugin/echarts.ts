@@ -1,16 +1,45 @@
-// 引入 ECharts 主模块
-import echarts from 'echarts/lib/echarts';
+// 引入 echarts 核心模块
+import * as echarts from 'echarts/core';
+// 引入 Canvas 渲染器
+import { CanvasRenderer } from 'echarts/renderers';
+// 引入图表
+import {
+    BarChart,
+    PieChart,
+    LineChart,
+    // 系列类型的定义后缀都为 SeriesOption
+    BarSeriesOption,
+    PieSeriesOption,
+    LineSeriesOption
+} from 'echarts/charts';
+// 引入组件
+import {
+    GridComponent,
+    TitleComponent,
+    LegendComponent,
+    TooltipComponent,
+    DataZoomComponent,
+    GraphicComponent,
+    // 组件类型的定义后缀都为 ComponentOption
+    GridComponentOption,
+    TitleComponentOption,
+    LegendComponentOption,
+    TooltipComponentOption,
+    DataZoomComponentOption,
+    GraphicComponentOption
+} from 'echarts/components';
 
-// 引入柱状图等
-import 'echarts/lib/chart/bar';
-import 'echarts/lib/chart/pie';
-import 'echarts/lib/chart/line';
+// 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
+export type ECOption = echarts.ComposeOption<
+    BarSeriesOption | PieSeriesOption | LineSeriesOption |
+    TitleComponentOption | GridComponentOption | LegendComponentOption | TooltipComponentOption | DataZoomComponentOption | GraphicComponentOption
+>;
 
-// 引入提示框和标题组件
-import 'echarts/lib/component/title';
-import 'echarts/lib/component/legend';
-import 'echarts/lib/component/tooltip';
-import 'echarts/lib/component/graphic';
-import 'echarts/lib/component/dataZoom';
+// 注册必须的组件
+echarts.use([
+    BarChart, PieChart, LineChart,
+    GridComponent, TitleComponent, LegendComponent, TooltipComponent, DataZoomComponent, GraphicComponent,
+    CanvasRenderer
+]);
 
 export default echarts;
