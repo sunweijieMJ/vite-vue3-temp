@@ -1,10 +1,10 @@
 import CustomImage from './custom-image.vue';
 import CustomChart from './custom-chart.vue';
 import CustomDialog from './custom-dialog.vue';
-// import CustomQuery from './custom-query.vue';
+import CustomQuery from './custom-query.vue';
 import CustomPagination from './custom-pagination.vue';
 import CustomScroll from './custom-scroll.vue';
-// import CustomXlsx from './custom-xlsx.vue';
+import CustomXlsx from './custom-xlsx.vue';
 // import CustomTagcache from './custom-tagcache.vue';
 import CustomToast from './custom-toast/toast';
 import CustomDrawer from './custom-drawer.vue';
@@ -14,11 +14,11 @@ const install = (app: any) => {
     app.component('CustomImage', CustomImage);
     app.component('CustomChart', CustomChart);
     app.component('CustomDialog', CustomDialog);
-    // Vue.component('CustomQuery', CustomQuery);
+    app.component('CustomQuery', CustomQuery);
     app.component('CustomPagination', CustomPagination);
     app.component('CustomScroll', CustomScroll);
-    // Vue.component('CustomXlsx', CustomXlsx);
-    // Vue.component('CustomTagcache', CustomTagcache);
+    app.component('CustomXlsx', CustomXlsx);
+    // app.component('CustomTagcache', CustomTagcache);
     app.component('CustomDrawer', CustomDrawer);
 
     // CustomToast
@@ -36,10 +36,10 @@ export {
     CustomImage,
     CustomChart,
     CustomDialog,
-    // CustomQuery,
+    CustomQuery,
     CustomPagination,
     CustomScroll,
-    // CustomXlsx,
+    CustomXlsx,
     // CustomTagcache,
     CustomToast
 };

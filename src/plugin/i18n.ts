@@ -11,11 +11,11 @@ if (!storage('localstorage').get('i18n')) {
     storage('localstorage').set('i18n', 'zh-CN');
 }
 const messages = {
-    [enElement.name]: {
+    'en': {
         el: enElement.el,
         ...enLocale
     },
-    [zhElement.name]: {
+    'zh-CN': {
         el: zhElement.el,
         ...zhLocale
     }

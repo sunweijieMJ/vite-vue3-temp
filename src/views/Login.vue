@@ -34,8 +34,8 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, inject, onMounted, ref, reactive } from 'vue';
-import { IMessage } from 'element-plus/lib/el-message/src/types';
+import { defineComponent, onMounted, ref, reactive } from 'vue';
+import { ElForm, ElMessage } from 'element-plus';
 import md5 from 'js-md5';
 import { basicApi } from '@/api';
 import storage from '@/utils/storage';
@@ -43,8 +43,6 @@ import storage from '@/utils/storage';
 export default defineComponent({
     name: 'Login',
     setup() {
-        const $msg = inject('$message') as IMessage;
-
         const validatePass = (rule: unknown, value: string, callback: (args?: unknown) => void) => {
             if (value.length < 6) {
                 callback(new Error('密码至少6位'));
@@ -78,11 +76,11 @@ export default defineComponent({
             });
         };
 
-        const formRef = ref(null);
+        const formRef = ref<typeof ElForm|null>(null);
 
         // 处理登录
         const handleLogin = () => {
-            (formRef as any).value.validate((valid: boolean) => {
+            (formRef.value as typeof ElForm).validate((valid: boolean) => {
                 if (valid) {
                     basicApi.authLogin({
                         account: form.account,
@@ -109,7 +107,7 @@ export default defineComponent({
         };
 
         onMounted(() => {
-            $msg.success('登录成功');
+            ElMessage.success('登录成功');
             getGraphicCode();
         });
 

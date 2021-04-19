@@ -10,7 +10,7 @@ const urlDict: Record<string, Record<string, string>> = {
         ModifyPass: 'userDomain/admin/v1/user/changePassword', // 修改密码
         UserInfo: 'userDomain/admin/v1/user/profile', // 用户信息
         GraphicCode: 'userDomain/admin/v1/user/captcha', // 图形验证码
-        MenuList: 'userDomain/admin/v1/resource/findUserMenus', // 菜单
+        MenuList: 'userDomain/admin/v1/resource/findMenus', // 菜单
         MemberSystem: 'userDomain/admin/v1/user/getUserMemberSystem ', // 获取会员体系选项
         GetDict: 'oms/admin/v1/masterData/getDict', // 获取数据字典
         TaskList: 'taskDomain/admin/v1/taskJob/getTaskJobPageList', // 查询所有任务Job带有分页列表

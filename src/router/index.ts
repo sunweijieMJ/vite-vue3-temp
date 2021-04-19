@@ -7,12 +7,6 @@ const vueI18n = i18n.global;
 
 const routes = [
     {
-        path: '/',
-        redirect() {
-            return '/login';
-        }
-    },
-    {
         path: '/login',
         name: 'Login',
         component: () => import('@/views/Login.vue'),
@@ -21,21 +15,21 @@ const routes = [
         }
     },
     {
-        path: '/layout',
+        path: '/:catchAll(.*)',
         name: 'Layout',
         component: Layout,
         meta: {
             title: 'Layout'
         }
-    },
-    {
-        path: '/:catchAll(.*)',
-        name: 'NotFount',
-        component: () => import('@/views/404.vue'),
-        meta: {
-            title: '页面不存在'
-        }
     }
+    // {
+    //     path: '/:catchAll(.*)',
+    //     name: 'NotFount',
+    //     component: () => import('@/views/404.vue'),
+    //     meta: {
+    //         title: '页面不存在'
+    //     }
+    // }
 ];
 const env = import.meta.env;
 const router = createRouter({

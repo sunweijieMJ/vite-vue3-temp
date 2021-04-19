@@ -25,11 +25,11 @@
     </custom-dialog>
 </template>
 <script lang="ts">
-import { defineComponent, inject, ref, reactive, computed } from 'vue';
+import { defineComponent, ref, reactive, computed } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
-import { IMessage } from 'element-plus/lib/el-message/src/types';
+import { ElForm, ElMessage } from 'element-plus';
 import md5 from 'js-md5';
 import { basicApi } from '@/api';
 import storage from '@/utils/storage';
@@ -38,11 +38,10 @@ import global from '@/config/global';
 export default defineComponent({
     name: 'ModifyPass',
     setup() {
-        const $msg = inject('$message') as IMessage;
         const $store = useStore();
         const $router = useRouter();
         const $i18n = useI18n();
-        const formRef = ref(null);
+        const formRef = ref<typeof ElForm|null>(null);
 
         const form = reactive({
             oldPass: '',
@@ -91,7 +90,7 @@ export default defineComponent({
 
         const beforeClose = (done: (args?: unknown) => void) => {
             if ($store.state.basic.modifyPass.type === 'required') {
-                $msg({ type: 'warning', message: `${$i18n.t('baseModifyPass.t119')}` });
+                ElMessage.warning(`${$i18n.t('baseModifyPass.t119')}`);
             } else {
                 done();
             }
@@ -99,7 +98,7 @@ export default defineComponent({
 
         const cancel = () => {
             if ($store.state.basic.modifyPass.type === 'required') {
-                $msg({ type: 'warning', message: `${$i18n.t('baseModifyPass.t119')}` });
+                ElMessage.warning(`${$i18n.t('baseModifyPass.t119')}`);
             } else {
                 $store.dispatch('basic/toggleModifyPass', { status: false });
             }
@@ -113,7 +112,7 @@ export default defineComponent({
         };
 
         const confirm = () => {
-            (formRef as any).value.validate(async(valid: boolean) => {
+            (formRef.value as typeof ElForm).validate(async(valid: boolean) => {
                 if (valid) {
                     await basicApi.modifyPass({
                         password: md5(form.oldPass),
@@ -122,7 +121,7 @@ export default defineComponent({
                         if (res.status) {
                             $store.dispatch('basic/toggleModifyPass', { status: false });
                             logout();
-                            $msg({ type: 'success', message: `${$i18n.t('baseModifyPass.t120')}` });
+                            ElMessage.success(`${$i18n.t('baseModifyPass.t120')}`);
                         }
                     });
                 } else {

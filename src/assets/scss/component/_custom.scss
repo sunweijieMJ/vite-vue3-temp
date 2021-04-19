@@ -1,3 +1,39 @@
+// 动态placeholder样式
+.design-form {
+    position: relative;
+    width: fit-content;
+    .input-label {
+        display: none;
+        position: absolute;
+        left: 10px;
+        height: 20px;
+        padding: 0 5px;
+        font-size: 12px;
+        line-height: 20px;
+        color: #a2a9b6;
+        pointer-events: none;
+        transform-origin: 0 0;
+        transition: 0.3s transform;
+        transform: translateY(50%);
+    }
+    .el-input__inner:not(:placeholder-shown) ~ .input-label, .el-input__inner:focus ~ .input-label {
+        transform: scale(0.85) translate(0, -50%) !important;
+        background-color: #fff;
+    }
+    .el-input__inner:placeholder-shown::placeholder {
+        color: transparent !important;
+    }
+    @media screen and (-webkit-min-device-pixel-ratio:0) {
+        .input-label {
+            display: initial;
+        }
+    }
+    @-moz-document url-prefix() {
+        .input-label {
+            display: initial;
+        }
+    }
+}
 // 列表按钮操作区
 .operate-area {
     display: flex;
@@ -159,6 +195,7 @@
         flex-shrink: 0;
         width: 30px;
         height: 30px;
+        min-height: initial;
         padding: 0;
         border-radius: 50%;
         background-color: #fff;

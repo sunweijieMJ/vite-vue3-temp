@@ -34,5 +34,13 @@ export default defineConfig({
             '@': path.resolve(__dirname, 'src'),
             'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-browser.prod'
         }
+    },
+    server: {
+        proxy: {
+            '/[masterdataDomain|taskDomain|userDomain|pim/admin|oms/admin]': {
+                target: 'http://dev.backendapi.aid.connext.net.cn/' // 开发
+                // target: 'http://test.backendapi.aid.connext.net.cn/' // 测试
+            }
+        }
     }
 });

@@ -17,3 +17,5 @@ declare module 'js-md5';
 
 declare module 'nprogress'
 
+declare module 'path-browserify'
+

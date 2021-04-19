@@ -1,8 +1,9 @@
-import { createStore } from 'vuex';
-import basic from './modules/basic';
+import { createStore, Store } from 'vuex';
 import vuexPersistedstate from 'vuex-persistedstate';
+import basic from './modules/basic';
+import { State } from './types';
 
-const store: any = createStore({
+const store: Store<State> = createStore({
     plugins: [vuexPersistedstate()],
     modules: {
         basic

@@ -53,7 +53,7 @@
     "t102": "determine",
     "t126": "cancel"
   },
-  "baseCustomHeader": {
+  "baseLayoutHeader": {
     "t101": "prompt",
     "t102": "determine",
     "t126": "cancel",
@@ -92,7 +92,8 @@
     "t131": "Please upload a file in the correct format",
     "t132": "Please import the correct information",
     "t133": "Importing files",
-    "t134": "Export file"
+    "t134": "Export file",
+    "t135": "Please set getImportData first"
   },
   "baseGlobal": {
     "t10": "please enter a valid phone number",
@@ -114,9 +115,6 @@
     "t104": "No permission",
     "t105": "service is not available",
     "t106": "Sub application"
-  },
-  "customIndex": {
-    "t129": "customize"
   },
   "baseIntercept": {
     "t2": "The operation is too frequent, please try again later",
