@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { brotliCompressSync } from 'zlib';
+import gzipPlugin from 'rollup-plugin-gzip';
 import styleImport from 'vite-plugin-style-import';
 import vueI18n from '@intlify/vite-plugin-vue-i18n';
 const path = require('path');
@@ -9,6 +11,10 @@ const port = 7000;
 export default defineConfig({
     plugins: [
         vue(),
+        gzipPlugin({
+            customCompression: content => brotliCompressSync(Buffer.from(content)),
+            fileName: '.br'
+        }),
         styleImport({
             libs: [
                 {
@@ -36,8 +42,14 @@ export default defineConfig({
             'vue-i18n': 'vue-i18n/dist/vue-i18n.esm-browser.prod'
         }
     },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: '@import "@/assets/scss/_base.scss";'
+            }
+        }
+    },
     server: {
-        open: false,
         host: 'localhost',
         port,
         https: false,

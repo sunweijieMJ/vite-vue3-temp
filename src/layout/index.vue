@@ -186,20 +186,20 @@ export default defineComponent({
                     basicStore
                 };
                 // 微应用数组
-                const MICRO_APP = env.MICRO_APP ?? storage('localstorage').get('microApp').split(',');
+                const MICRO_APP = storage('localstorage').get('microApp');
 
                 let webUrl = env.VITE_BUILD_ENV ? window.env.VITE_WebURL : env.VITE_WebURL;
                 if (webUrl?.endsWith('/')) {
                     webUrl = webUrl.substr(0, webUrl.length - 1);
                 }
 
-                // 公司部署
+                // 部署
                 const microApp = microApps.filter((item: any, index: number) => {
                     if (window.env.VITE_MicroApps.includes(item.name)) {
                         item.props = { ...msg };
                         item.entry = webUrl + item.entry;
 
-                        if (MICRO_APP.length && MICRO_APP.includes(item.name)) {
+                        if (MICRO_APP && MICRO_APP.split(',').includes(item.name)) {
                             item.entry = `//localhost:${7001 + index}/`;
                         }
                         return item;
@@ -207,25 +207,25 @@ export default defineComponent({
                 });
 
                 store.commit('basic/MENU_LIST', menuListInfo);
-                // // 初始化
+                // 初始化
                 initMenu();
 
-                // 预加载子应用
-                prefetchApps(microApp);
-                // 注册子应用
-                registerMicroApps(microApp);
-                // 设置默认子应用
-                if (window.location.pathname.split('/')[1]) {
-                    defaultApp = '/' + window.location.pathname.split('/')[1];
-                }
-                if (!defaultApp) defaultApp = menuListInfo[0].routePath;
-                setDefaultMountApp(defaultApp);
-                // 启动微服务
-                start({
-                    prefetch: true
-                });
-                // 设置全局未捕获一场处理器
-                addGlobalUncaughtErrorHandler(event => console.log(event));
+                // // 预加载子应用
+                // prefetchApps(microApp);
+                // // 注册子应用
+                // registerMicroApps(microApp);
+                // // 设置默认子应用
+                // if (window.location.pathname.split('/')[1]) {
+                //     defaultApp = '/' + window.location.pathname.split('/')[1];
+                // }
+                // if (!defaultApp) defaultApp = menuListInfo[0].routePath;
+                // setDefaultMountApp(defaultApp);
+                // // 启动微服务
+                // start({
+                //     prefetch: true
+                // });
+                // // 设置全局未捕获一场处理器
+                // addGlobalUncaughtErrorHandler(event => console.log(event));
             });
         };
 
