@@ -107,7 +107,6 @@ export default defineComponent({
         };
 
         onMounted(() => {
-            ElMessage.success('登录成功');
             getGraphicCode();
         });
 

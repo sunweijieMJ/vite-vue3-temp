@@ -15,6 +15,8 @@ declare global {
     interface Window {
         env: {
             VITE_BaseURL: string;
+            VITE_WebURL: string;
+            VITE_MicroApps: string[];
         };
     }
 }

@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import styleImport from 'vite-plugin-style-import';
 import vueI18n from '@intlify/vite-plugin-vue-i18n';
 const path = require('path');
+const port = 7000;
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,6 +37,10 @@ export default defineConfig({
         }
     },
     server: {
+        open: false,
+        host: 'localhost',
+        port,
+        https: false,
         proxy: {
             '/[masterdataDomain|taskDomain|userDomain|pim/admin|oms/admin]': {
                 target: 'http://dev.backendapi.aid.connext.net.cn/' // 开发

@@ -18,16 +18,15 @@ import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import { useRoute, useRouter } from 'vue-router';
 import { ElMessage, ElMessageBox } from 'element-plus';
-import path from 'path-browserify';
 import { LayoutAside, LayoutHeader, LayoutNav } from './components/index';
 import { ModifyPass, ServeError } from '@/components/basic';
 import { CurMenuType } from '@/store/types';
 import microApps from '@/config/microApps';
-import mockMenu from '@/config/menu';
+// import mockMenu from '@/config/menu';
 
 import store from '@/store';
 import basicStore from '@/store/modules/basic';
-// import CustomComponent from '@/components/custom';
+import * as CustomComponent from '@/components/custom';
 import pager from '@/utils/pager';
 import storage from '@/utils/storage';
 import filters from '@/utils/filters';
@@ -41,6 +40,9 @@ import {
     start, // 启动qiankun
     addGlobalUncaughtErrorHandler // 添加全局未捕获异常处理器
 } from 'qiankun';
+
+// 环境变量
+const env = import.meta.env;
 
 export default defineComponent({
     name: 'Layout',
@@ -171,61 +173,59 @@ export default defineComponent({
             store.dispatch('basic/getMenuList').then((res: any) => {
                 const menuListInfo = res.data;
                 // const menuListInfo = mockMenu;
-                // let defaultApp = null;
-                // // 定义子应用数据
-                // const msg = {
-                //     pager,
-                //     storage,
-                //     filters,
-                //     directives,
-                //     // CustomComponent,
-                //     basicI18n: i18n,
-                //     basicState: store.state,
-                //     basicStore
-                // };
-                // // 微应用数组
-                // const MICRO_APP = process.env.MICRO_APP ?? storage('localstorage').get('microApp').split(',');
+                let defaultApp = null;
+                // 定义子应用数据
+                const msg = {
+                    pager,
+                    storage,
+                    filters,
+                    directives,
+                    CustomComponent,
+                    basicI18n: i18n,
+                    basicState: store.state,
+                    basicStore
+                };
+                // 微应用数组
+                const MICRO_APP = env.MICRO_APP ?? storage('localstorage').get('microApp').split(',');
 
-                // let webUrl = window.env.VUE_APP_WebURL;
-                // if (webUrl?.endsWith('/')) {
-                //     webUrl = webUrl.substr(0, webUrl.length - 1);
-                // }
+                let webUrl = env.VITE_BUILD_ENV ? window.env.VITE_WebURL : env.VITE_WebURL;
+                if (webUrl?.endsWith('/')) {
+                    webUrl = webUrl.substr(0, webUrl.length - 1);
+                }
 
-                // // 公司部署
-                // const microApp = microApps.filter((item: any, index: number) => {
-                //     if (window.env.VUE_APP_MicroApps.includes(item.name)) {
-                //         item.props = { ...msg };
-                //         item.entry = webUrl + item.entry;
+                // 公司部署
+                const microApp = microApps.filter((item: any, index: number) => {
+                    if (window.env.VITE_MicroApps.includes(item.name)) {
+                        item.props = { ...msg };
+                        item.entry = webUrl + item.entry;
 
-                //         if (MICRO_APP.length && MICRO_APP.includes(item.name)) {
-                //             item.entry = `//localhost:${7001 + index}/`;
-                //         }
-                //         return item;
-                //     }
-                // });
-
-                // window.microApp = microApp;
+                        if (MICRO_APP.length && MICRO_APP.includes(item.name)) {
+                            item.entry = `//localhost:${7001 + index}/`;
+                        }
+                        return item;
+                    }
+                });
 
                 store.commit('basic/MENU_LIST', menuListInfo);
                 // // 初始化
                 initMenu();
 
-                // // 预加载子应用
-                // prefetchApps(microApp);
-                // // 注册子应用
-                // registerMicroApps(microApp);
-                // // 设置默认子应用
-                // if (window.location.pathname.split('/')[1]) {
-                //     defaultApp = '/' + window.location.pathname.split('/')[1];
-                // }
-                // if (!defaultApp) defaultApp = menuListInfo[0].routePath;
-                // setDefaultMountApp(defaultApp);
-                // // 启动微服务
-                // start({
-                //     prefetch: true
-                // });
-                // // 设置全局未捕获一场处理器
-                // addGlobalUncaughtErrorHandler(event => console.log(event));
+                // 预加载子应用
+                prefetchApps(microApp);
+                // 注册子应用
+                registerMicroApps(microApp);
+                // 设置默认子应用
+                if (window.location.pathname.split('/')[1]) {
+                    defaultApp = '/' + window.location.pathname.split('/')[1];
+                }
+                if (!defaultApp) defaultApp = menuListInfo[0].routePath;
+                setDefaultMountApp(defaultApp);
+                // 启动微服务
+                start({
+                    prefetch: true
+                });
+                // 设置全局未捕获一场处理器
+                addGlobalUncaughtErrorHandler(event => console.log(event));
             });
         };
 

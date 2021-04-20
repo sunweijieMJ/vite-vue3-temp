@@ -3,6 +3,7 @@ interface ImportMetaEnv {
   VITE_BaseURL: string
   VITE_FileURL: string
   VITE_WebURL: string
+  MICRO_APP: string[]
 }
 
 declare module '*.vue' {
