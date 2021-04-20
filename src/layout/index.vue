@@ -1,10 +1,10 @@
 <template>
     <div class="layout">
-        <layout-aside />
+        <layout-aside :active-menu="state.activeMenu" />
         <div class="container">
             <layout-header />
             <div class="main">
-                <layout-nav />
+                <layout-nav :active-menu="state.activeMenu" />
                 <div id="micro-app" />
             </div>
         </div>
@@ -14,11 +14,16 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed, watch, onMounted, reactive } from 'vue';
+import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
+import { useRoute, useRouter } from 'vue-router';
+import { ElMessage, ElMessageBox } from 'element-plus';
+import path from 'path-browserify';
 import { LayoutAside, LayoutHeader, LayoutNav } from './components/index';
 import { ModifyPass, ServeError } from '@/components/basic';
 import { CurMenuType } from '@/store/types';
 import microApps from '@/config/microApps';
-// import mockMenu from '@/config/menu';
+import mockMenu from '@/config/menu';
 
 import store from '@/store';
 import basicStore from '@/store/modules/basic';
@@ -36,10 +41,6 @@ import {
     start, // 启动qiankun
     addGlobalUncaughtErrorHandler // 添加全局未捕获异常处理器
 } from 'qiankun';
-import { useRoute, useRouter } from 'vue-router';
-import { useStore } from 'vuex';
-import { ElMessageBox } from 'element-plus';
-import { useI18n } from 'vue-i18n';
 
 export default defineComponent({
     name: 'Layout',
@@ -51,10 +52,31 @@ export default defineComponent({
         const $store = useStore();
         const $route = useRoute();
         const $router = useRouter();
-        let defaultMenu: any = reactive({});
+
+        const state: {
+            activeMenu: {
+                routePath?: string;
+            },
+            defaultMenu: {
+                routePath?: string;
+            }
+        } = reactive({
+            activeMenu: {},
+            defaultMenu: {}
+        });
+
+        let pathname = window.location.pathname;
 
         let menuList = computed(() => {
             return $store.state.basic.menuList;
+        });
+
+        let firstMenu = computed(() => {
+            return $store.state.basic.firstMenu;
+        });
+
+        let secondMenu = computed(() => {
+            return $store.state.basic.secondMenu;
         });
 
         // 遍历路由树
@@ -64,13 +86,20 @@ export default defineComponent({
                     findChild(menu.children[i], pathname);
                 }
             } else {
-                if (menu.routePath && menu.routePath.includes(pathname)) {
-                    defaultMenu = menu;
+                if (menu.tab && menu.routePath.includes(pathname)) {
+                    state.defaultMenu = menu;
+                }
+                if (menu.routePath === pathname) {
+                    state.activeMenu = menu;
                 }
             }
         };
 
         const initMenu = () => {
+            // 重置state
+            state.activeMenu = {};
+            state.defaultMenu = {};
+
             if (!menuList.value.length) {
                 ElMessageBox.alert(`${$i18n.t('baseLayoutIndex.t100')}`, `${$i18n.t('baseLayoutIndex.t101')}`, {
                     confirmButtonText: `${$i18n.t('baseLayoutIndex.t102')}`,
@@ -84,25 +113,55 @@ export default defineComponent({
                 return;
             }
 
-            const pathname = window.location.pathname;
-            const firstMenu = menuList.value.find((item: CurMenuType) => item.routeName === pathname.split('/')[1]);
-            if (firstMenu) {
-                $store.dispatch('basic/switchFirstMenu', firstMenu);
+            // 一级菜单默认跳转
+            let activeFirstMenu = menuList.value.find((item: CurMenuType) => item.routeName === pathname.split('/')[1]);
+
+            if (activeFirstMenu) {
+                $store.dispatch('basic/switchFirstMenu', activeFirstMenu);
             } else {
-                $router.push({ path: $store.state.basic.menuList[0].routePath });
+                pathname = $store.state.basic.menuList[0].routePath;
                 $store.dispatch('basic/switchFirstMenu', $store.state.basic.menuList[0]);
             }
 
-            if (!firstMenu?.children?.length) return;
+            // 二级菜单默认跳转
+            if(!firstMenu.value?.children?.length) {
+                ElMessage.warning('暂无二级菜单，请前往权限管理去添加');
+                return;
+            }
+
+            let activeSecondMenu = firstMenu.value.children.find((item: CurMenuType) => item.routeName === pathname.split('/')[2]);
+
+            if (activeSecondMenu) {
+                $store.dispatch('basic/switchSecondMenu', activeSecondMenu);
+            } else {
+                pathname = firstMenu.value.children[0].routePath;
+                $store.dispatch('basic/switchSecondMenu', firstMenu.value.children[0]);
+            }
+
+            // 查询默认路由和激活路由
+            findChild(secondMenu.value, pathname);
+            if(state.activeMenu.routePath) state.defaultMenu = state.activeMenu;
+
+            // 三级菜单默认跳转
+            let activeThirdMenu = secondMenu.value?.children?.find((item: CurMenuType) => item.routeName === pathname.split('/')[3]);
+
+            if(activeThirdMenu) {
+                $store.dispatch('basic/switchThirdMenu', state.activeMenu);
+            } else {
+                if(secondMenu.value?.children?.length) {
+                    pathname = secondMenu.value.children[0].routePath;
+                    $store.dispatch('basic/switchThirdMenu', secondMenu.value.children[0]);
+                }
+            }
 
             // 默认跳转
-            if (!pathname.split('/')[2]) {
-                findChild(firstMenu, pathname);
-                $router.push({ path: defaultMenu.routePath });
+            if (!activeThirdMenu && state.defaultMenu.routePath) {
+                $router.push({ path: state.defaultMenu.routePath });
             }
         };
 
         watch(() => $route.fullPath, () => {
+            pathname = window.location.pathname;
             initMenu();
         });
 
@@ -111,7 +170,7 @@ export default defineComponent({
             store.dispatch('basic/getUserInfo');
             store.dispatch('basic/getMenuList').then((res: any) => {
                 const menuListInfo = res.data;
-                // // const menuListInfo = mockMenu;
+                // const menuListInfo = mockMenu;
                 // let defaultApp = null;
                 // // 定义子应用数据
                 // const msg = {
@@ -173,6 +232,10 @@ export default defineComponent({
         onMounted(() => {
             register();
         });
+
+        return {
+            state
+        };
     }
 });
 </script>

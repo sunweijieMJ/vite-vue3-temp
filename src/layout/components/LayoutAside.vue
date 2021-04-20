@@ -8,7 +8,7 @@
                 </svg>
             </h1>
             <!-- menu -->
-            <el-menu ref="menuRef" :default-active="defaultActive" :collapse-transition="false" :collapse="true" text-color="#6F7178" active-text-color="#B95881">
+            <el-menu :default-active="defaultActive" :collapse-transition="false" :collapse="true" text-color="#6F7178" active-text-color="#B95881">
                 <sidebar-item v-for="item in asideList" :key="item.path" :item="item" :base-path="item.path" :is-collapse="menuCollapse" :disabled="!menuCollapse" :is-jump="true" @switchAside="switchAside" />
                 <span class="line" :style="[{transform: 'translateY(' + state.lineOffsetTop + 'px)'}, {visibility: state.lineOffsetTop >= 0 ? 'initial' : 'hidden'}]" />
             </el-menu>
@@ -24,7 +24,7 @@
 <script lang="ts">
 import { defineComponent, ref, reactive, computed, watch, nextTick } from 'vue';
 import { useStore } from 'vuex';
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { CurMenuType } from '@/store/types';
 import SidebarItem from './SidebarItem.vue';
 
@@ -33,43 +33,62 @@ export default defineComponent({
     components: {
         SidebarItem
     },
-    setup() {
+    props: {
+        activeMenu: {
+            type: Object,
+            required: true
+        }
+    },
+    setup(props) {
         const $store = useStore();
-        const $route = useRoute();
         const $router = useRouter();
 
         let rootRef = ref<HTMLElement|null>(null);
-        let menuRef = ref<any|null>(null);
 
         const state: {
             lineOffsetTop: number;
-            activeMenu: {
-                routePath?: string;
-            };
-            defaultMenu: {
-                routePath?: string;
-            };
         } = reactive({
-            lineOffsetTop: -100,
-            activeMenu: {},
-            defaultMenu: {}
+            lineOffsetTop: -100
         });
 
         let defaultActive = computed(() => {
-            return state.activeMenu.routePath;
+            return props.activeMenu.routePath;
         });
 
         let menuCollapse = computed(() => {
             return $store.state.basic.menuCollapse;
         });
 
-        let firstMenu = computed(() => {
-            return $store.state.basic.firstMenu;
+        let asideList = computed(() => {
+            const asideList = $store.state.basic.firstMenu?.children?.filter((item: CurMenuType) => item.tab !== false) ?? [];
+            return asideList;
         });
 
-        let asideList = computed(() => {
-            return firstMenu.value.children.filter((item: CurMenuType) => item.tab !== false);
+        // 初始化aside导航
+        const activeLine = () => {
+            nextTick(() => {
+                // 切换active样式
+                const item = rootRef.value?.querySelector('.el-menu .is-active');
+                const line = rootRef.value?.querySelector('.el-menu .line');
+
+                if (item) {
+                    const offsetTop = (item as HTMLElement).offsetTop;
+                    const offsetHeight = (item as HTMLElement).offsetHeight;
+                    state.lineOffsetTop = offsetTop + ((offsetHeight - (line as HTMLElement).offsetHeight) / 2);
+                } else {
+                    state.lineOffsetTop = -100;
+                }
+            });
+        };
+
+        watch(() => props.activeMenu, () => {
+            activeLine();
         });
+
+        // 切换导航
+        const switchAside = (item: CurMenuType) => {
+            $router.push({ path: item.routePath as string });
+        };
 
         // 过滤字符串
         const trimStr = (str: string): string => {
@@ -91,89 +110,13 @@ export default defineComponent({
             }
         };
 
-        // 菜单收起/展开切换
+        // 切换菜单 收起/展开
         const toggleMenu = () => {
             $store.dispatch('basic/toggleMenuCollapse', !menuCollapse.value);
         };
 
-        // 遍历路由树
-        const findChild = (menu: CurMenuType, pathname: string) => {
-            if (menu.children?.length) {
-                for (let i = menu.children.length - 1; i >= 0; i--) {
-                    findChild(menu.children[i], pathname);
-                }
-            } else {
-                if (menu.tab && menu.routePath.includes(pathname)) {
-                    state.defaultMenu = menu;
-                }
-                if (menu.routePath === pathname) {
-                    state.activeMenu = menu;
-                }
-            }
-        };
-
-        // 初始化aside导航
-        const initMenu = () => {
-            if (!firstMenu.value?.children?.length) return;
-            // 查询二级菜单
-            const pathname = window.location.pathname;
-            const secondMenu = firstMenu.value.children.find((item: CurMenuType) => item.routeName === pathname.split('/')[2]);
-            if (secondMenu) {
-                $store.dispatch('basic/switchSecondMenu', secondMenu);
-                // 查询默认路由和激活路由
-                findChild(secondMenu, pathname);
-            }
-
-            // 激活三级菜单
-            if (state.activeMenu.routePath) {
-                nextTick(() => {
-                    menuRef.value.activeIndex = state.activeMenu.routePath;
-                });
-                $store.dispatch('basic/switchThirdMenu', state.activeMenu);
-            }
-
-            nextTick(() => {
-                // 切换active样式
-                const item = rootRef.value?.querySelector('.el-menu .is-active');
-                const line = rootRef.value?.querySelector('.el-menu .line');
-
-                if (item) {
-                    const offsetTop = (item as HTMLElement).offsetTop;
-                    const offsetHeight = (item as HTMLElement).offsetHeight;
-                    state.lineOffsetTop = offsetTop + ((offsetHeight - (line as HTMLElement).offsetHeight) / 2);
-                } else {
-                    state.lineOffsetTop = -100;
-                }
-            });
-        };
-
-        // 切换导航
-        const switchAside = (item: CurMenuType) => {
-            findChild(item, item.routePath);
-            state.activeMenu = state.defaultMenu;
-
-            $router.push({ path: state.activeMenu.routePath as string });
-
-            // 查询二级路由
-            nextTick(() => {
-                initMenu();
-                // 手动更新索引
-                nextTick(() => {
-                    menuRef.value.activeIndex = state.activeMenu.routePath;
-                });
-            });
-        };
-
-        watch(() => $route.fullPath, () => {
-            initMenu();
-        });
-
-        watch(firstMenu, () => {
-            initMenu();
-        }, {immediate: true});
-
         return {
-            rootRef, menuRef, state, defaultActive, menuCollapse, asideList,
+            rootRef, state, defaultActive, menuCollapse, asideList,
             skipDashboard, toggleMenu, switchAside
         };
     }
@@ -215,6 +158,7 @@ export default defineComponent({
             flex-direction: column;
             align-items: center;
             width: 100%;
+            margin: 4px 0;
             // border-right: none 0;
             // aside样式覆盖
             >.sidebar-item {

@@ -27,9 +27,11 @@
             <sidebar-link :to="resolvePath(item.routePath)">
                 <el-menu-item v-if="item.iconCode" class="icon" :index="resolvePath(item.routePath)">
                     <el-tooltip effect="dark" :open-delay="200" :content="item.title" placement="top">
-                        <svg class="icon" aria-hidden="true" width="20px" height="20px">
-                            <use :xlink:href="'#' + item.iconCode" />
-                        </svg>
+                        <div class="icon-box">
+                            <svg class="icon" aria-hidden="true" width="20px" height="20px">
+                                <use :xlink:href="'#' + item.iconCode" />
+                            </svg>
+                        </div>
                     </el-tooltip>
                 </el-menu-item>
                 <el-menu-item v-else class="text" :index="resolvePath(item.routePath)">{{ item.title }}</el-menu-item>

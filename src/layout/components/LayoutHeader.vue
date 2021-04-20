@@ -124,15 +124,14 @@
 </template>
 <script lang="ts">
 import { defineComponent, ref, computed, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { ElMessage, ElMessageBox } from 'element-plus';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 import { TaskList } from '@/views/components';
-import storage from '@/utils/storage';
 import { CurMenuType } from '@/store/types';
 import { basicApi } from '@/api';
-import { ElMessage, ElMessageBox } from 'element-plus';
-
+import storage from '@/utils/storage';
 
 interface MemberSystemOptionType {
     id: number;
@@ -145,9 +144,9 @@ export default defineComponent({
         TaskList
     },
     setup() {
-        const $i18n = useI18n();
         const $store = useStore();
         const $router = useRouter();
+        const $i18n = useI18n();
         const taskRef = ref<typeof TaskList|null>(null);
 
         let keywords = '';

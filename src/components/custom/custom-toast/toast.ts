@@ -39,7 +39,6 @@ const Toast:ToastImplements = (options: ToastOptions) => {
     // 清空显示
     if (instanceQueue.length && !isMultiple) {
         instanceQueue.forEach((item) => {
-            console.log(item.component);
             item.component?.ctx.close();
         });
     }

@@ -160,7 +160,6 @@ export default defineComponent({
 
         // 处理导入的数据
         const dealFile = (name: string, data: Array<unknown>) => {
-            console.log(data);
             inputFile.value = '';
             fullscreenLoading.value = false;
             if (data.length <= 0) {
