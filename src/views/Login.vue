@@ -5,18 +5,18 @@
                 <use xlink:href="#iconLogo" />
             </svg>
         </h2>
-        <el-form ref="formRef" class="login-form" :model="form" :rules="rules" auto-complete="on" label-position="left" @keyup.enter="handleLogin">
+        <el-form ref="formRef" class="login-form" :model="state.form" :rules="state.rules" auto-complete="on" label-position="left" @keyup.enter="handleLogin">
             <h3 class="title">{{ $t('baseLogin.t1') }}</h3>
             <el-form-item class="account" prop="account" :label="$t('baseLogin.t2')" label-width="90px">
-                <el-input v-model="form.account" maxlength="50" />
+                <el-input v-model="state.form.account" maxlength="50" />
             </el-form-item>
             <div class="container">
                 <el-form-item class="password" prop="password" :label="$t('baseLogin.t3')" label-width="90px">
-                    <el-input v-model="form.password" type="password" maxlength="16" />
+                    <el-input v-model="state.form.password" type="password" maxlength="16" />
                 </el-form-item>
                 <el-form-item class="captchaCode" prop="captchaCode" :label="$t('baseLogin.t4')" label-width="110px">
-                    <el-input v-model="form.captchaCode" maxlength="4" />
-                    <img class="graphics" :src="captchaImage" alt="" @click="getGraphicCode">
+                    <el-input v-model="state.form.captchaCode" maxlength="4" />
+                    <img class="graphics" :src="state.captchaImage" alt="" @click="getGraphicCode">
                 </el-form-item>
                 <div class="submit" @click.prevent="handleLogin">
                     <svg class="icon default" aria-hidden="true" width="80px" height="60px">
@@ -28,7 +28,7 @@
                 </div>
             </div>
              <el-form-item v-if="0" class="autologin">
-                <el-checkbox v-model="form.autologin">{{ $t('baseLogin.t5') }}</el-checkbox>
+                <el-checkbox v-model="state.form.autologin">{{ $t('baseLogin.t5') }}</el-checkbox>
             </el-form-item>
         </el-form>
     </div>
@@ -40,6 +40,18 @@ import md5 from 'js-md5';
 import { useI18n } from 'vue-i18n';
 import { basicApi } from '@/api';
 import storage from '@/utils/storage';
+
+interface LoginState {
+    rules: unknown;
+    form: {
+        account: string;
+        password: string;
+        captchaCode: string;
+        captchaCodeToken: string;
+        autologin: boolean;
+    },
+    captchaImage: string;
+}
 
 export default defineComponent({
     name: 'Login',
@@ -55,27 +67,28 @@ export default defineComponent({
             }
         };
 
-        const rules = reactive({
-            account: [{ required: true, message: ' ', trigger: 'blur' }],
-            password: [{ validator: validatePass, trigger: 'blur' }],
-            captchaCode: [{ required: true, message: ' ', trigger: 'blur' }]
-        });
-
-        let captchaImage = ref('');
-        const form = reactive({
-            account: '',
-            password: '',
-            captchaCode: '',
-            captchaCodeToken: '',
-            autologin: false
+        const state: LoginState = reactive({
+            rules: {
+                account: [{ required: true, message: ' ', trigger: 'blur' }],
+                password: [{ validator: validatePass, trigger: 'blur' }],
+                captchaCode: [{ required: true, message: ' ', trigger: 'blur' }]
+            },
+            form: {
+                account: '',
+                password: '',
+                captchaCode: '',
+                captchaCodeToken: '',
+                autologin: false
+            },
+            captchaImage: ''
         });
 
         // 获取图形验证码
         const getGraphicCode = async() => {
             basicApi.getGraphicCode().then(res => {
                 if (res.status) {
-                    captchaImage.value = res.data.imageBase;
-                    form.captchaCodeToken = res.data.captchaCodeToken;
+                    state.captchaImage = res.data.imageBase;
+                    state.form.captchaCodeToken = res.data.captchaCodeToken;
                 }
             });
         };
@@ -85,13 +98,13 @@ export default defineComponent({
             (formRef.value as typeof ElForm).validate((valid: boolean) => {
                 if (valid) {
                     basicApi.authLogin({
-                        account: form.account,
-                        password: md5(form.password),
-                        captchaCode: form.captchaCode,
-                        captchaCodeToken: form.captchaCodeToken
+                        account: state.form.account,
+                        password: md5(state.form.password),
+                        captchaCode: state.form.captchaCode,
+                        captchaCodeToken: state.form.captchaCodeToken
                     }).then(res => {
                         if (res.status) {
-                            if (form.autologin) {
+                            if (state.form.autologin) {
                                 storage('localstorage').set('token', res.data.token);
                             } else {
                                 storage('localstorage').set('token', res.data.token);
@@ -114,7 +127,7 @@ export default defineComponent({
         });
 
         return {
-            formRef, form, rules, captchaImage,
+            formRef, state,
             getGraphicCode, handleLogin
         };
     }

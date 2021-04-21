@@ -1,3 +1,5 @@
+import { CommonPageList } from './index';
+
 export interface AuthLogin {
     account: string;
     password: string;
@@ -10,26 +12,18 @@ export interface ModifyPass {
     newPassword: string;
 }
 
-export interface TaskList {
+export interface TaskList extends CommonPageList {
     queryParam?: {
         taskName?: string;
         taskStatus?: string;
         createTimeStart?: string;
         createTimeEnd?: string;
     };
-    pageNum?: number;
-    pageSize?: number;
-    pageRemark?: string;
-    sortBy?: string;
 }
 
-export interface TaskDetailList {
+export interface TaskDetailList extends CommonPageList {
     queryParam?: {
         taskCode?: string;
         resultEnum?: string;
     };
-    pageNum?: number;
-    pageSize?: number;
-    pageRemark?: string;
-    sortBy?: string;
 }

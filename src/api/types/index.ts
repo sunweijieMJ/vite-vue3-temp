@@ -6,3 +6,10 @@ export interface CustomResponse {
     data: any;
     origin?: any;
 }
+
+export interface CommonPageList {
+    pageNum?: number;
+    pageSize?: number;
+    pageRemark?: string;
+    sortBy?: string;
+}

@@ -100,7 +100,7 @@ interface TableHeaderList {
     width?: string|number;
     minWidth?: string|number;
 }
-type TaskListState = {
+interface TaskListState {
     isShow: boolean;
     createTime: string;
     form: {

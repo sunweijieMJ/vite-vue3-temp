@@ -67,7 +67,7 @@ class Basic extends Abstract {
 
     /**
      * 获取数据字典
-     * @params {Array<string>} dictTypeList
+     * @params {string[]} dictTypeList
      * @params {string} systemProjectCode
      */
     getDict(data: { systemProjectCode?: string; dictTypeList: Array<string> } = { systemProjectCode: 'oms', dictTypeList: [] }) {
