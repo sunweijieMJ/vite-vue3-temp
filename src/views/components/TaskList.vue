@@ -91,6 +91,41 @@ interface TableType {
     filePath: string;
     [key: string]: unknown;
 }
+interface TableHeaderList {
+    key: string;
+    title: string;
+    show?: boolean;
+    fixed?: string;
+    align?: string;
+    width?: string|number;
+    minWidth?: string|number;
+}
+type TaskListState = {
+    isShow: boolean;
+    createTime: string;
+    form: {
+        taskName: string;
+        taskStatus: string;
+        beginTime: string;
+        endTime: string;
+    };
+    Dict: {
+        [key: string]: Array<{
+            dictKey: string;
+            dictValue: string;
+            dictName: string
+        }>
+    };
+    tableInfo: {
+        list?: TableType[];
+        total?: number;
+    };
+    rowSelected: TableType[];
+    pageInfo: {
+        pageNum: number;
+        pageSize: number;
+    };
+}
 
 export default defineComponent({
     name: 'TaskList',
@@ -98,25 +133,7 @@ export default defineComponent({
         const $i18n = useI18n();
         const xlsxRef = ref<typeof CustomXlsx | null>(null);
 
-        const state: {
-            isShow: boolean;
-            createTime: string;
-            form: {
-                taskName: string;
-                taskStatus: string;
-                beginTime: string;
-                endTime: string;
-            }
-            Dict: {[key: string]: Array<{dictKey: string; dictValue: string;dictName: string}>},
-            tableInfo: {
-                list?: Array<TableType>;
-            }
-            rowSelected: Array<TableType>;
-            pageInfo: {
-                pageNum: number;
-                pageSize: number;
-            }
-        } = reactive({
+        const state: TaskListState = reactive({
             isShow: false,
             createTime: '',
             form: {
@@ -143,7 +160,7 @@ export default defineComponent({
             resultEnum: `${$i18n.t('baseTaskList.t159')}`
         };
 
-        const tableHeaderList = [
+        const tableHeaderList: TableHeaderList[] = [
             { title: `${$i18n.t('baseTaskList.t147')}`, key: 'taskName', minWidth: 130, show: true },
             { title: `${$i18n.t('baseTaskList.t149')}`, key: 'createTime', minWidth: 130, show: true },
             { title: `${$i18n.t('baseTaskList.t148')}`, key: 'taskStatus', minWidth: 130, show: true },

@@ -2,6 +2,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import { FilterType } from './utils/filters';
 import * as CustomPlugin from './plugin';
 import * as CustomComponents from './components/custom';
 // 解决滚动背景warning
@@ -19,6 +20,13 @@ declare global {
             VITE_MicroApps: string[];
         };
     }
+}
+
+// 对vue进行类型补充说明
+declare module '@vue/runtime-core' {
+  interface ComponentCustomProperties {
+    $filters: FilterType
+  }
 }
 
 const app = createApp(App);

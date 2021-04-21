@@ -1,3 +1,4 @@
+import { App } from 'vue';
 import CustomImage from './custom-image.vue';
 import CustomChart from './custom-chart.vue';
 import CustomDialog from './custom-dialog.vue';
@@ -10,7 +11,7 @@ import CustomToast from './custom-toast/toast';
 import CustomDrawer from './custom-drawer.vue';
 import { i18n } from '@/plugin';
 
-const install = (app: any) => {
+const install = (app: App): void => {
     app.component('CustomImage', CustomImage);
     app.component('CustomChart', CustomChart);
     app.component('CustomDialog', CustomDialog);

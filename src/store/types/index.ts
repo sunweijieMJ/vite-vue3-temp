@@ -42,7 +42,7 @@ export interface TagView extends Partial<_RouteLocationBase> {
     meta: MetaType
 }
 
-export interface State {
+export interface BasicState {
     errorPage: PopupType;
     modifyPass: PopupType;
     userInfo: UserInfoType;

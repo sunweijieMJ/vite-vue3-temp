@@ -1,7 +1,11 @@
 import { createStore, Store } from 'vuex';
 import vuexPersistedstate from 'vuex-persistedstate';
 import basic from './modules/basic';
-import { State } from './types';
+import { BasicState } from './types';
+
+export type State = {
+    basic: BasicState
+}
 
 const store: Store<State> = createStore({
     plugins: [vuexPersistedstate()],

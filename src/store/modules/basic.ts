@@ -1,7 +1,7 @@
 import { Commit } from 'vuex';
 import { basicApi } from '@/api';
 import { CustomResponse } from '@/api/types';
-import { PopupType, CurMenuType, UserInfoType, TagView, State, MemberSystemOptionType } from '../types';
+import { PopupType, CurMenuType, UserInfoType, TagView, BasicState, MemberSystemOptionType } from '../types';
 import { RouteRecordNormalized } from 'vue-router';
 
 export default {
@@ -102,39 +102,39 @@ export default {
         }
     },
     mutations: {
-        ACTIVE_ERROR_PAGE(state: State, res: PopupType): void {
+        ACTIVE_ERROR_PAGE(state: BasicState, res: PopupType): void {
             state.errorPage = res;
         },
-        USER_INFO(state: State, userInfo: UserInfoType): void {
+        USER_INFO(state: BasicState, userInfo: UserInfoType): void {
             state.userInfo = userInfo;
         },
-        MENU_LIST(state: State, res: Array<CurMenuType>): void {
+        MENU_LIST(state: BasicState, res: Array<CurMenuType>): void {
             state.menuList = res;
         },
-        FIRST_MENU(state: State, data: CurMenuType): void {
+        FIRST_MENU(state: BasicState, data: CurMenuType): void {
             state.firstMenu = data;
         },
-        SECOND_MENU(state: State, data: CurMenuType): void {
+        SECOND_MENU(state: BasicState, data: CurMenuType): void {
             state.secondMenu = data;
         },
-        THIRD_MENU(state: State, data: CurMenuType): void {
+        THIRD_MENU(state: BasicState, data: CurMenuType): void {
             state.thirdMenu = data;
         },
-        TOGGLE_MODIFY_PASS(state: State, data: PopupType): void {
+        TOGGLE_MODIFY_PASS(state: BasicState, data: PopupType): void {
             state.modifyPass = data;
         },
-        TOGGLE_LANGUAGE(state: State, data: string): void {
+        TOGGLE_LANGUAGE(state: BasicState, data: string): void {
             state.language = data;
         },
-        TOGGLE_MENU_COLLAPSE(state: State, data: boolean): void {
+        TOGGLE_MENU_COLLAPSE(state: BasicState, data: boolean): void {
             state.menuCollapse = data;
         },
         // 保存路由
-        SAVE_ROUTES(state: State, routes: Array<RouteRecordNormalized>): void {
+        SAVE_ROUTES(state: BasicState, routes: Array<RouteRecordNormalized>): void {
             state.routes = routes.concat(routes);
         },
         // 添加缓存标签
-        ADD_VISITED_VIEW(state: State, view: TagView): void {
+        ADD_VISITED_VIEW(state: BasicState, view: TagView): void {
             // 判断是否标签是否已存在
             if (state.visitedViews.some(item => item.fullPath === view.fullPath)) return;
 
@@ -147,7 +147,7 @@ export default {
             }));
         },
         // 添加缓存页面
-        ADD_CACHED_VIEW(state: State, view: TagView): void {
+        ADD_CACHED_VIEW(state: BasicState, view: TagView): void {
             // 已存在页面return
             const name = view.meta?.cacheName || view.name;
             if (name === null || state.cachedViews.includes(name)) return;
@@ -161,7 +161,7 @@ export default {
             }
         },
         // 删除缓存标签
-        DEL_VISITED_VIEW(state: State, view: TagView): void {
+        DEL_VISITED_VIEW(state: BasicState, view: TagView): void {
             for (const [i, v] of state.visitedViews.entries()) {
                 if (v.fullPath === view.fullPath) {
                     state.visitedViews.splice(i, 1);
@@ -170,21 +170,21 @@ export default {
             }
         },
         // 删除缓存页面
-        DEL_CACHED_VIEW(state: State, view: TagView): void {
+        DEL_CACHED_VIEW(state: BasicState, view: TagView): void {
             const name = view.meta?.cacheName || view.name;
             if (name === null) return;
             const index = state.cachedViews.indexOf(name);
             index > -1 && state.cachedViews.splice(index, 1);
         },
         // 删除其他缓存标签
-        DEL_OTHERS_VISITED_VIEWS(state: State, view: TagView): void {
+        DEL_OTHERS_VISITED_VIEWS(state: BasicState, view: TagView): void {
             // 过滤不能关闭的页面和自身
             state.visitedViews = state.visitedViews.filter(item => {
                 return item.meta.affix || item.fullPath === view.fullPath;
             });
         },
         // 删除其他缓存页面
-        DEL_OTHERS_CACHED_VIEWS(state: State, view: TagView): void {
+        DEL_OTHERS_CACHED_VIEWS(state: BasicState, view: TagView): void {
             const name = view.meta?.cacheName || view.name;
             if (name === null) return;
             const index = state.cachedViews.indexOf(name);
@@ -196,17 +196,17 @@ export default {
             }
         },
         // 删除所有缓存标签
-        DEL_ALL_VISITED_VIEWS(state: State): void {
+        DEL_ALL_VISITED_VIEWS(state: BasicState): void {
             // 过滤不能关闭的标签
             const affixTags = state.visitedViews.filter(tag => tag.meta.affix);
             state.visitedViews = affixTags;
         },
         // 删除所有缓存页面
-        DEL_ALL_CACHED_VIEWS(state: State): void {
+        DEL_ALL_CACHED_VIEWS(state: BasicState): void {
             state.cachedViews = [];
         },
         // 更新当前激活的缓存标签
-        UPDATE_VISITED_VIEW(state: State, view: TagView): void {
+        UPDATE_VISITED_VIEW(state: BasicState, view: TagView): void {
             for (let v of state.visitedViews) {
                 if (v.fullPath === view.fullPath) {
                     v = Object.assign(v, view);
@@ -215,24 +215,24 @@ export default {
             }
         },
         // 设置任务中心状态
-        SET_TASK_DOT_STATUS(state: State, data: boolean): void {
+        SET_TASK_DOT_STATUS(state: BasicState, data: boolean): void {
             state.taskDotStatus = data;
         },
         // 设置会员体系选项
-        SET_MEMBER_SYSTEM_OPTIONS(state: State, data: Array<MemberSystemOptionType>): void {
+        SET_MEMBER_SYSTEM_OPTIONS(state: BasicState, data: Array<MemberSystemOptionType>): void {
             state.memberSystemOptions = data;
         },
 
         // 设置当前会员体系
-        SET_MEMBER_SYSTEM(state: State, data: MemberSystemOptionType): void {
+        SET_MEMBER_SYSTEM(state: BasicState, data: MemberSystemOptionType): void {
             state.curMemberSystem = data;
         },
         // 设置是否展示会员体系
-        SET_DISPLAY_MEMBER_SYSTEM(state: State, data: boolean): void {
+        SET_DISPLAY_MEMBER_SYSTEM(state: BasicState, data: boolean): void {
             state.displayCurMemberSystem = data;
         }
     },
-    state: (): State => ({
+    state: (): BasicState => ({
         errorPage: {
             status: false
         },

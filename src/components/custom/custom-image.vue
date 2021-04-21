@@ -5,14 +5,14 @@
         :preview-src-list="previewSrcList" :hide-on-click-modal="hideOnClickModal" :z-index="zIndex"
         @load="load" @error="error"
     >
-        <template #placeholder class="image-slot">
-            <img class="default" :style="{'object-fit': fit}" src="https://devops01.oss-cn-shanghai.aliyuncs.com/staticImg/image_loading.jpg" alt="">
+        <template #placeholder>
+            <img class="default" src="https://devops01.oss-cn-shanghai.aliyuncs.com/staticImg/image_loading.jpg" alt="">
         </template>
-        <template v-if="currentSrc" #error class="image-slot">
-            <img class="default" :style="{'object-fit': fit}" src="https://devops01.oss-cn-shanghai.aliyuncs.com/staticImg/image_error.jpg" alt="">
+        <template v-if="currentSrc" #error>
+            <img class="default" src="https://devops01.oss-cn-shanghai.aliyuncs.com/staticImg/image_error.jpg" alt="">
         </template>
-        <template v-else #error class="image-slot">
-            <img class="default" :style="{'object-fit': fit}" src="https://devops01.oss-cn-shanghai.aliyuncs.com/staticImg/image_null.jpg" alt="">
+        <template v-else #error>
+            <img class="default" src="https://devops01.oss-cn-shanghai.aliyuncs.com/staticImg/image_null.jpg" alt="">
         </template>
     </el-image>
 </template>
@@ -103,9 +103,10 @@ export default defineComponent({
         width: inherit;
         height: inherit;
         pointer-events: none;
-        .image-slot, .image-slot .default {
+        .default {
             width: inherit;
             height: inherit;
+            object-fit: v-bind(fit);
         }
     }
 </style>

@@ -24,7 +24,7 @@ import { CurMenuType } from '@/store/types';
 import microApps from '@/config/microApps';
 // import mockMenu from '@/config/menu';
 
-import store from '@/store';
+import store, { State } from '@/store';
 import basicStore from '@/store/modules/basic';
 import * as CustomComponent from '@/components/custom';
 import pager from '@/utils/pager';
@@ -51,7 +51,7 @@ export default defineComponent({
     },
     setup() {
         const $i18n = useI18n();
-        const $store = useStore();
+        const $store = useStore<State>();
         const $route = useRoute();
         const $router = useRouter();
 
@@ -170,7 +170,7 @@ export default defineComponent({
         const register = () => {
         // 获取app注册表
             store.dispatch('basic/getUserInfo');
-            store.dispatch('basic/getMenuList').then((res: any) => {
+            store.dispatch('basic/getMenuList').then(res => {
                 const menuListInfo = res.data;
                 // const menuListInfo = mockMenu;
                 let defaultApp = null;
@@ -194,7 +194,7 @@ export default defineComponent({
                 }
 
                 // 部署
-                const microApp = microApps.filter((item: any, index: number) => {
+                const microApp = microApps.filter((item, index: number) => {
                     if (window.env.VITE_MicroApps.includes(item.name)) {
                         item.props = { ...msg };
                         item.entry = webUrl + item.entry;

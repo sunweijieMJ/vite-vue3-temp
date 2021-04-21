@@ -1,5 +1,5 @@
 import { Directive } from 'vue';
-import filters from '@/utils/filters';
+import filters, { FilterKey } from '@/utils/filters';
 import * as directives from '@/utils/directives/index';
 import storage from '@/utils/storage';
 import customMessage from '@/components/custom/custom-message';
@@ -21,11 +21,11 @@ if (canvas.getContext && canvas.getContext('2d')) {
     }
 }
 
-const install = (app: any) => {
+const install = (app: any): void => {
     // 挂载过滤器
     app.config.globalProperties.$filters = {};
     for(const key in filters) {
-        app.config.globalProperties.$filters[key] = filters[key];
+        app.config.globalProperties.$filters[key] = filters[key as keyof typeof FilterKey];
     }
 
     // 挂载指令
@@ -34,8 +34,8 @@ const install = (app: any) => {
     });
 
     // 注册element
-    element.components.forEach(component => {
-        if (component.name) app.component(component.name, component);
+    element.components.forEach((component) => {
+        if (component.name) app.component(component.name as string, component);
     });
     Object.values(element.plugins).forEach(plugin => {
         app.use(plugin);

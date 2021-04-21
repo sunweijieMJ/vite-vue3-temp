@@ -9,6 +9,7 @@ import storage from '@/utils/storage';
 import instance from './intercept';
 import { CustomResponse } from './types';
 import { element, i18n } from '@/plugin';
+import { CustomToast } from '@/components/custom';
 
 // i18n对象
 const vueI18n = i18n.global;
@@ -64,7 +65,7 @@ class Abstract {
                         message = err?.data?.errorMessage || err?.message || (url + `${vueI18n.t('baseAbstract.t0')}`);
                         break;
                 }
-                element.plugins.ElMessage.error(message);
+                CustomToast({ message });
                 // eslint-disable-next-line
                 reject({ status: false, message, data: null});
             });

@@ -4,7 +4,8 @@
     </el-scrollbar>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, inject } from 'vue';
+import { ElScrollbar } from 'element-plus';
 const tagSpacing = 4;
 
 export default defineComponent({
@@ -16,14 +17,14 @@ export default defineComponent({
         }
     },
     setup() {
-        const scrollRef = ref(null);
+        const scrollRef = ref<typeof ElScrollbar|null>(null);
 
         const moveToTarget = (currentTag: HTMLElement) => {
             const scrollContainer = scrollRef;
-            const container = scrollContainer.$el as HTMLElement;
+            const container = scrollContainer.value?.$el;
             const containerWidth = container.offsetWidth;
-            const scrollWrapper = scrollContainer.$refs.wrap as HTMLElement;
-            const tagList = this.$parent.$refs.tag as any[];
+            const scrollWrapper = scrollContainer.value?.$refs.wrap as HTMLElement;
+            const tagList = inject('tagListRef') as any[];
 
             let firstTag = null;
             let lastTag = null;
