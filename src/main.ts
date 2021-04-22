@@ -12,6 +12,7 @@ import 'nprogress/nprogress.css';
 // 路由拦截注册
 import './router/intercept';
 
+// 扩展window类型
 declare global {
     interface Window {
         env: {
