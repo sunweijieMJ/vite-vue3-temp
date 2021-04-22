@@ -185,10 +185,7 @@ export default defineComponent({
         }
 
         .query-container {
-            .el-form-item {
-                flex: 0 0 calc(100% / v-bind(maxLength));
-            }
-            .control-box {
+            .el-form-item, .control-box {
                 flex: 0 0 calc(100% / v-bind(maxLength));
             }
         }

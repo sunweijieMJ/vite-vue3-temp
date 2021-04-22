@@ -7,7 +7,6 @@ const path = require('path');
 const port = 7000;
 const timeStamp = Date.now();
 
-
 // https://vitejs.dev/config/
 export default ({ mode }: { mode: string }): unknown => {
     process.env = {...process.env, ...loadEnv(mode, process.cwd())};
@@ -72,40 +71,20 @@ export default ({ mode }: { mode: string }): unknown => {
                 output: {
                     entryFileNames: `static/js/[name].${process.env.VITE_Version}.t${timeStamp}.js`,
                     chunkFileNames: `static/js/[name].${process.env.VITE_Version}.t${timeStamp}.js`,
-                    assetFileNames: `static/js/[name].${process.env.VITE_Version}.t${timeStamp}.[ext]`
-                    // manualChunks(id) {
-                    //     const layout = /[/]src[/]layout[/]/.test(id);
-                    //     const customComponent = /[\\/]src[\\/]components[\\/]custom[/]/.test(id);
-                    //     const basicComponent = /[\\/]src[\\/]components[\\/]basic[\\/]/.test(id);
-                    //     const echarts = /[\\/]node_modules[\\/]echarts[\\/]/.test(id);
-                    //     const lodash = /[\\/]node_modules[\\/]lodash[\\/]/.test(id);
-                    //     const moment = /[\\/]node_modules[\\/]moment[\\/]/.test(id);
-
-                    //     // const xlsxIndex = /[\\/]node_modules[\\/]xlsx[\\/]xlsx.js/.test(id);
-                    //     // const xlsx = /[\\/]node_modules[\\/]xlsx[\\/]/.test(id);
-
-                    //     // const elementThemeIndex = /[\\/]node_modules[\\/]element-plus[\\/]lib[\\/]theme-chalk[\\/]index.css/.test(id);
-                    //     // const elementTheme = /[\\/]node_modules[\\/]element-plus[\\/]lib[\\/]theme-chalk[\\/]/.test(id);
-                    //     // const elementIndex = /[\\/]node_modules[\\/]element-plus[\\/]lib[\\/]index.js/.test(id);
-                    //     // const element = /[\\/]node_modules[\\/]element-plus[\\/]/.test(id);
-
-                    //     switch (true) {
-                    //         case layout:
-                    //             return 'layout';
-                    //         case customComponent:
-                    //             return  'customComponent';
-                    //         case basicComponent:
-                    //             return 'basicComponent';
-                    //         case echarts:
-                    //             return 'echarts';
-                    //         case lodash:
-                    //             return 'lodash';
-                    //         case moment:
-                    //             return 'moment';
-                    //         default:
-                    //             return 'vendors';
-                    //     }
-                    // }
+                    assetFileNames: `static/js/[name].${process.env.VITE_Version}.t${timeStamp}.[ext]`,
+                    manualChunks(id) {
+                        const chunkMap = new Map();
+                        chunkMap.set(/[\\/]src[\\/]layout[\\/]/.test(id), 'basicLayout');
+                        chunkMap.set(/[\\/]src[\\/]components[\\/]/.test(id), 'basicComponent');
+                        chunkMap.set(/[\\/]node_modules[\\/]echarts[\\/]/.test(id), 'echarts');
+                        chunkMap.set(/[\\/]node_modules[\\/]lodash[\\/]/.test(id), 'lodash');
+                        chunkMap.set(/[\\/]node_modules[\\/]moment[\\/]/.test(id), 'moment');
+                        chunkMap.set(/[\\/]node_modules[\\/]qiankun[\\/]/.test(id), 'qiankun');
+                        chunkMap.set(/[\\/]node_modules[\\/]xlsx[\\/]xlsx.js/.test(id), 'xlsxIndex');
+                        chunkMap.set(/[\\/]node_modules[\\/]xlsx[\\/](?!(xlsx.js))/.test(id), 'xlsx');
+                        chunkMap.set(/[\\/]node_modules[\\/]element-plus[\\/]/.test(id), 'element');
+                        return chunkMap.get(true) || 'vendors';
+                    }
                 }
             }
         }
