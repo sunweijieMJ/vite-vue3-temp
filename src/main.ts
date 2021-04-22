@@ -25,9 +25,9 @@ declare global {
 
 // 对vue进行类型补充说明
 declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $filters: FilterType
-  }
+    interface ComponentCustomProperties {
+        $filters: FilterType
+    }
 }
 
 const app = createApp(App);
