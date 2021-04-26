@@ -6,14 +6,14 @@
   "scripts": {
     "preview": "vite preview --port 7000",
     "serve": "vite --mode",
-    "build": "vue-tsc --noEmit && vite build --mode",
+    "build": "vue-tsc --noEmit --skipLibCheck && vite build --mode",
     "lint": "eslint --ext .js,.ts,.jsx,.tsx,.vue src"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "default-passive-events": "^2.0.0",
     "echarts": "^5.0.2",
-    "element-plus": "^1.0.2-beta.40",
+    "element-plus": "^1.0.2-beta.41",
     "js-md5": "^0.7.3",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
