@@ -95,7 +95,7 @@ export default defineComponent({
 
         // 处理登录
         const handleLogin = () => {
-            (formRef.value as typeof ElForm).validate((valid: boolean) => {
+            (formRef.value as typeof ElForm).validate((valid) => {
                 if (valid) {
                     basicApi.authLogin({
                         account: state.form.account,
