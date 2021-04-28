@@ -111,7 +111,6 @@ export default defineComponent({
                             }
                             window.location.href = '/';
                             ElMessage.success(`${$i18n.t('baseLogin.t111')}`);
-
                         } else {
                             getGraphicCode();
                         }
