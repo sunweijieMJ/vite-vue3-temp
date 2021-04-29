@@ -20,25 +20,27 @@ import {
     TooltipComponent,
     DataZoomComponent,
     GraphicComponent,
+    PolarComponent,
     // 组件类型的定义后缀都为 ComponentOption
     GridComponentOption,
     TitleComponentOption,
     LegendComponentOption,
     TooltipComponentOption,
     DataZoomComponentOption,
-    GraphicComponentOption
+    GraphicComponentOption,
+    PolarComponentOption
 } from 'echarts/components';
 
 // 通过 ComposeOption 来组合出一个只有必须组件和图表的 Option 类型
 export type ECOption = echarts.ComposeOption<
     BarSeriesOption | PieSeriesOption | LineSeriesOption |
-    TitleComponentOption | GridComponentOption | LegendComponentOption | TooltipComponentOption | DataZoomComponentOption | GraphicComponentOption
+    TitleComponentOption | GridComponentOption | LegendComponentOption | TooltipComponentOption | DataZoomComponentOption | GraphicComponentOption | PolarComponentOption
 >;
 
 // 注册必须的组件
 echarts.use([
     BarChart, PieChart, LineChart,
-    GridComponent, TitleComponent, LegendComponent, TooltipComponent, DataZoomComponent, GraphicComponent,
+    GridComponent, TitleComponent, LegendComponent, TooltipComponent, DataZoomComponent, GraphicComponent, PolarComponent,
     CanvasRenderer
 ]);
 

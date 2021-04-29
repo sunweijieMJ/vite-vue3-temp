@@ -5,7 +5,9 @@
             <layout-header />
             <div class="main">
                 <layout-nav :active-menu="state.activeMenu" />
-                <div id="micro-app" />
+                <div id="micro-app">
+                    <demo />
+                </div>
             </div>
         </div>
         <modify-pass />
@@ -24,11 +26,12 @@ import { CurMenuType } from '@/store/types';
 import mockMenu from '@/config/menu';
 import store, { State } from '@/store';
 import storage from '@/utils/storage';
+import Demo from './Demo.vue';
 
 export default defineComponent({
     name: 'Layout',
     components: {
-        LayoutAside, LayoutHeader, LayoutNav, ModifyPass, ServeError
+        LayoutAside, LayoutHeader, LayoutNav, ModifyPass, ServeError, Demo
     },
     setup() {
         const $i18n = useI18n();

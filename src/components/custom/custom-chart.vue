@@ -49,7 +49,7 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
     .custom-chart {
-        width: 500px;
-        height: 400px;
+        width: 800px;
+        height: 600px;
     }
 </style>

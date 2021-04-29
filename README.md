@@ -11,7 +11,7 @@
     <a href="https://npmjs.com/package/vite"><img src="https://img.shields.io/badge/vite-v2.2.1-blue" alt="vite package"></a>
 </p>
 
-<h1>vite vue3 temp</h1>
+# vite vue3 temp
 
 ## 简介
 >使用最新的`vue3`,`vite2`,`typescript`等主流技术搭建的一个供学习参考的模版工程。
@@ -96,8 +96,7 @@ yarn build pro
 yarn lint
 ```
 
-### 浏览器支持
-
+## 浏览器支持
 本地开发推荐使用`Chrome 80+` 浏览器
 
 支持现代浏览器, 不支持 IE
