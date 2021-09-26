@@ -1,0 +1,233 @@
+{
+  "base403": {
+    "t107": "Back to homepage",
+    "t108": "No permission, please contact the administrator"
+  },
+  "base404": {
+    "t107": "Back to homepage"
+  },
+  "base503": {
+    "t107": "Back to homepage",
+    "t109": "Try refresh"
+  },
+  "baseLogin": {
+    "t4": "\\ Security Code",
+    "t5": "Next automatic login",
+    "t1": "Sign In",
+    "t110": "Password at least 6 digits",
+    "t111": "login successful",
+    "t2": "\\ User Name",
+    "t3": "\\ Password"
+  },
+  "baseTaskList": {
+    "t121": "shut down",
+    "t146": "Task center",
+    "t147": "mission name",
+    "t148": "Task status",
+    "t149": "Creation time",
+    "t150": "End of creation",
+    "t152": "View failed results",
+    "t153": "download",
+    "t154": "Subline number of the task",
+    "t155": "Task unique business code",
+    "t156": "Success or error message",
+    "t157": "Remarks",
+    "t158": "Execution report time",
+    "t159": "Result enumeration",
+    "t160": "Current progress",
+    "t161": "Task abnormal data",
+    "t162": "No abnormal data",
+    "t151": "operating"
+  },
+  "baseAbstract": {
+    "t0": "Request failed",
+    "t1": "Login timed out, please log in again"
+  },
+  "baseCommonPagination": {
+    "t122": "Total",
+    "t123": "Records",
+    "t124": "First",
+    "t125": "page"
+  },
+  "baseCustomDialog": {
+    "t102": "determine",
+    "t126": "cancel"
+  },
+  "baseLayoutHeader": {
+    "t101": "prompt",
+    "t102": "determine",
+    "t126": "cancel",
+    "t138": "Please select membership system",
+    "t139": "Please enter the keywords you want to search",
+    "t140": "change Password",
+    "t141": "sign out",
+    "t142": "Chinese",
+    "t143": "Are you sure to log out of the current account?",
+    "t144": "Logout failed"
+  },
+  "baseCustomModalbox": {
+    "t126": "cancel",
+    "t135": "title",
+    "t136": "content",
+    "t137": "confirm"
+  },
+  "baseCustomPagination": {
+    "t1": "Total",
+    "t2": "Record",
+    "t3": "page"
+  },
+  "baseCustomQuery": {
+    "t1": "Reset",
+    "t2": "Inquire",
+    "t3": "Unfold",
+    "t4": "Put away"
+  },
+  "baseCustomTagcache": {
+    "t121": "shut down",
+    "t127": "Refresh",
+    "t128": "Close other"
+  },
+  "baseCustomXlsx": {
+    "t130": "Parsing",
+    "t131": "Please upload a file in the correct format",
+    "t132": "Please import the correct information",
+    "t133": "Importing files",
+    "t134": "Export file",
+    "t135": "Please set getImportData first"
+  },
+  "baseGlobal": {
+    "t10": "please enter a valid phone number",
+    "t11": "Please enter the correct phone",
+    "t12": "please enter your vaild email",
+    "t13": "Please enter the correct zip code",
+    "t4": "Can only be a combination of numbers, letters or underscores",
+    "t5": "Please enter the code",
+    "t6": "Please enter a name",
+    "t7": "Can't just enter a space",
+    "t8": "Cannot contain special characters!",
+    "t9": "Please enter the correct fax"
+  },
+  "routerIndex": {
+    "t100": "You do not have permission, please contact the administrator to assign permission before using",
+    "t101": "prompt",
+    "t102": "determine",
+    "t103": "log in",
+    "t104": "No permission",
+    "t105": "service is not available",
+    "t106": "Sub application"
+  },
+  "baseIntercept": {
+    "t2": "The operation is too frequent, please try again later",
+    "t3": "Loading"
+  },
+  "baseLayoutIndex": {
+    "t100": "You do not have permission, please contact the administrator to assign permission before using",
+    "t101": "prompt",
+    "t102": "determine"
+  },
+  "configMenu": {
+    "t14": "Basic management",
+    "t15": "Basic data",
+    "t16": "Channel management",
+    "t17": "Store management",
+    "t18": "Warehouse management",
+    "t19": "Express management",
+    "t20": "Supplier type",
+    "t21": "Supplier Management",
+    "t22": "Purchase type",
+    "t23": "Purchase return type",
+    "t24": "authority management",
+    "t25": "User Management",
+    "t26": "user list",
+    "t27": "Role list",
+    "t28": "Data group list",
+    "t29": "Organization list",
+    "t30": "Menu list",
+    "t31": "Log management",
+    "t32": "Operation log",
+    "t34": "Merchandise management",
+    "t35": "Commodity release management",
+    "t36": "Commodity off-shelf management",
+    "t37": "Publish new products",
+    "t38": "Commodity portfolio management",
+    "t39": "Commodity recycling bin",
+    "t40": "Commodity library",
+    "t41": "Brand management",
+    "t42": "Brand Management List",
+    "t43": "Category management",
+    "t44": "Virtual category management",
+    "t45": "Sales category management",
+    "t47": "Commodity label management",
+    "t48": "Commodity marking",
+    "t49": "Data Bus",
+    "t50": "Store authorization management",
+    "t51": "Authorized shop",
+    "t52": "File management",
+    "t53": "Address mapping management",
+    "t54": "Order center",
+    "t55": "Order file",
+    "t56": "Store configuration",
+    "t57": "Commodity mapping",
+    "t58": "Order label",
+    "t59": "Material file",
+    "t60": "Promotional gifts",
+    "t61": "business",
+    "t62": "Order management",
+    "t63": "Abnormal order",
+    "t64": "Order Tracking",
+    "t65": "Invoice inquiry",
+    "t66": "After-sales management",
+    "t68": "Refunds",
+    "t69": "Stock Center",
+    "t70": "Warehouse file",
+    "t33": "Commodity Center",
+    "t46": "Label management",
+    "t67": "Refund order management",
+    "t71": "Warehouse comparison table",
+    "t72": "Upload inventory settings",
+    "t73": "Procurement management",
+    "t74": "purchase order",
+    "t75": "Purchase receipt",
+    "t76": "Purchase return outbound order",
+    "t77": "Material inventory statistics",
+    "t78": "Inventory management",
+    "t79": "Inventory adjustment",
+    "t80": "Warehouse processing order",
+    "t81": "External warehouse docking",
+    "t82": "Odd door",
+    "t83": "Configuration",
+    "t84": "Commodity synchronization",
+    "t85": "Interface log query",
+    "t86": "Member Centre",
+    "t87": "Member 360",
+    "t88": "Member loyalty",
+    "t89": "Membership level rules",
+    "t90": "Level setting",
+    "t91": "Level up and down rules",
+    "t92": "Member Points Rules",
+    "t93": "Points basic settings",
+    "t94": "Transaction reward points",
+    "t95": "Interactive points task",
+    "t96": "More",
+    "t97": "Data management",
+    "t98": "Metadata management",
+    "t99": "Membership system management"
+  },
+  "baseModifyPass": {
+    "t112": "For account security, please change the initial password immediately",
+    "t113": "Please enter the old password",
+    "t114": "Please enter a new password",
+    "t115": "Confirm the new password",
+    "t116": "Characters, including numbers and letters",
+    "t117": "Password does not conform to the format",
+    "t118": "The password input is different, please re-enter",
+    "t119": "Please modify the initial password",
+    "t120": "Successful operation"
+  },
+  "baseServeError": {
+    "t121": "shut down"
+  },
+  "baseTableDraggable": {
+    "t145": "Defaults"
+  }
+}

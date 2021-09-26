@@ -1,0 +1,71 @@
+{
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.snippetSuggestions": "top",
+    "editor.formatOnPaste": true,
+    "editor.minimap.enabled": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "explorer.confirmDelete": false,
+    "files.eol": "\n",
+    "files.associations": {
+        "*.vue": "vue"
+    },
+    "eslint.options": {
+        "plugins": [
+            "html",
+            "vue",
+            "react"
+        ]
+    },
+    "eslint.alwaysShowStatus": true,
+    "eslint.validate": [
+        "vue",
+        "html",
+        "javascript",
+        "typescript",
+        "javascriptreact",
+        "typescriptreact"
+    ],
+    "window.zoomLevel": 0,
+    "team.showWelcomeMessage": false,
+    "breadcrumbs.enabled": false,
+    "stylelint.enable": true,
+    "scss.validate": false,
+    "less.validate": false,
+    "css.validate": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "workbench.iconTheme": "vscode-icons",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "terminal.integrated.rendererType": "dom",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
+    },
+    //   "editor.formatOnSave": true,
+    //   "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "files.exclude": {
+        // "dist": true,
+        "src/**/*.wxss": true,
+        // "node_modules": true,
+        // ".vscode": true
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "git.ignoreMissingGitWarning": true,
+    "workbench.editor.enablePreview": false,
+    "team.showFarewellMessage": false,
+    "i18n-ally.sourceLanguage": "zh-CN",
+    "i18n-ally.displayLanguage": "zh-CN",
+    "i18n-ally.enabledParsers": [
+        "json"
+    ],
+    "i18n-ally.extract.targetPickingStrategy": "file-previous",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "terminal.integrated.tabs.enabled": true,
+    "git.confirmSync": false,
+    "gitlens.advanced.messages": {
+        "suppressGitMissingWarning": true
+    },
+    "i18n-ally.localesPaths": [
+        "src/locale"
+    ]
+}

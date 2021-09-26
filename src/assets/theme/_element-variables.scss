@@ -1,0 +1,37 @@
+/* 自定义主题
+ * https://element.eleme.cn/#/zh-CN/theme/preview
+ */
+
+/*********************************** Color ***********************************/
+// Brand Color
+$--color-primary: #f1b7d0;
+// Functional Color
+$--color-success: #67c23a;
+$--color-warning: #e6a23c;
+$--color-danger: #b95881;
+$--color-info: #909399;
+$--color-error: #b95881;
+
+/*********************************** Color ***********************************/
+$--table-row-hover-background-color: #eee;
+
+/*********************************** Button ***********************************/
+$--button-font-weight: 400;
+
+/*********************************** Checkbox ***********************************/
+$--checkbox-font-color: #909297;
+
+/*********************************** Pagination ***********************************/
+$--pagination-hover-color: #5755b3;
+
+/*********************************** Tree ***********************************/
+$--tree-node-hover-background-color: #f5f7fa;
+$--tree-expand-icon-color: #c8c8c8;
+
+/*********************************** Table ***********************************/
+$--table-row-hover-background-color: #f6f7fb;
+
+/*********************************** Radio ***********************************/
+$--radio-checked-font-color: #5755b3;
+$--radio-checked-icon-color: #5755b3;
+$--radio-checked-input-border-color: #5755b3;
