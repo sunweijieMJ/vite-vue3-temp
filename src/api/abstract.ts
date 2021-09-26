@@ -67,7 +67,8 @@ class Abstract {
                         break;
                 }
                 CustomToast({ message });
-                reject({ status: false, message, data: null });
+                // eslint-disable-next-line
+                reject({ status: false, message, data: null});
             });
         });
     }
