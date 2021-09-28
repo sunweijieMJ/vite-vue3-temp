@@ -7,6 +7,7 @@
     "serve": "vite --mode",
     "build": "vue-tsc --noEmit --skipLibCheck && vite build --mode",
     "preview": "vite preview --port 8888",
+    "format": "prettier --check .",
     "lint": "npm run lint:script && npm run lint:style",
     "lint:script": "eslint src --ext .js,.ts,.jsx,.tsx,.vue",
     "lint:style": "stylelint 'src/**/*.{css,scss,less,vue}'",
@@ -29,6 +30,8 @@
     "xlsx": "^0.17.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.2.0",
+    "@commitlint/config-conventional": "^13.2.0",
     "@intlify/vite-plugin-vue-i18n": "^2.1.2",
     "@types/node": "^14.14.37",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
@@ -40,14 +43,17 @@
     "@vuedx/typescript-plugin-vue": "^0.6.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-html": "^6.1.2",
     "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-vue": "^7.16.0",
     "husky": "^7.0.0",
     "lint-staged": "^11.1.2",
     "path-browserify": "^1.0.1",
+    "prettier": "^2.4.1",
     "sass": "^1.38.1",
     "stylelint": "^13.13.1",
     "stylelint-config-sass-guidelines": "^8.0.0",
@@ -58,11 +64,6 @@
     "vite-plugin-compression": "^0.2.4",
     "vite-plugin-style-import": "^0.9.2",
     "vue-tsc": "^0.0.15"
-  },
-  "husky": {
-    "hooks": {
-        "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,vue}": [

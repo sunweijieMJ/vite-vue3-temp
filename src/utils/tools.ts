@@ -28,8 +28,8 @@ const fillZero = (n: number): string => (n < 10 ? `0${n}` : `${n}`);
 
 // 加
 const add = (arg1: number, arg2: number): number => {
-    let r1: number; let
-        r2: number;
+    let r1: number;
+    let r2: number;
 
     try {
         r1 = arg1.toString().split('.')[1].length;

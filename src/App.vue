@@ -16,7 +16,8 @@ import { ModifyPass, ServeError } from '@/components/basic/index';
 export default defineComponent({
     name: 'App',
     components: {
-        ModifyPass, ServeError,
+        ModifyPass,
+        ServeError,
     },
     setup() {
         const $i18n = useI18n();

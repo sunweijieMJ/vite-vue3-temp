@@ -11,6 +11,7 @@ module.exports = {
         'airbnb-base',
         'plugin:@typescript-eslint/recommended',
         'plugin:vue/vue3-recommended',
+        // 'plugin:prettier/recommended',
         // 'plugin:react/recommended',
     ],
     parser: "vue-eslint-parser",
@@ -24,6 +25,7 @@ module.exports = {
     },
     plugins: [
         '@typescript-eslint',
+        'prettier',
         'html',
         'vue',
         // 'react',
@@ -72,6 +74,8 @@ module.exports = {
     //     }
     },
     rules: {
+        "prettier/prettier": "off",
+
         'no-console': process.env.NODE_ENV === 'production' ? ['error', { allow: ['warn', 'error'] }] : 'off', // 禁用 console
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 禁用 debugger
         '@typescript-eslint/no-var-requires': 'off', // require 报错
@@ -93,7 +97,7 @@ module.exports = {
                 'array': false,
                 'object': true
             }
-        ]
+        ],
 
         // /**
         //  * 代码中可能的错误或逻辑错误
