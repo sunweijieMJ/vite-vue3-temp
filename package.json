@@ -67,12 +67,10 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,vue}": [
-      "npm run lint:script",
-      "prettier --write"
+      "npm run lint:script"
     ],
     "src/**/*.{css,scss,less,vue}": [
-      "npm run lint:style",
-      "prettier --write"
+      "npm run lint:style"
     ]
   },
   "engines": {
