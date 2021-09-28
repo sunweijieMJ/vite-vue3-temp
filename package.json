@@ -8,7 +8,7 @@
     "build": "vue-tsc --noEmit --skipLibCheck && vite build --mode",
     "preview": "vite preview --port 8888",
     "format": "prettier --check .",
-    "lint": "npm run lint:script && npm run lint:style",
+    "lint": "npm run lint:script && npm run lint:style && npm run format",
     "lint:script": "eslint src --ext .js,.ts,.jsx,.tsx,.vue",
     "lint:style": "stylelint 'src/**/*.{css,scss,less,vue}'",
     "prepare": "husky install"
@@ -67,10 +67,12 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,vue}": [
-      "npm run lint:script"
+      "npm run lint:script",
+      "prettier --write"
     ],
     "src/**/*.{css,scss,less,vue}": [
-      "npm run lint:style"
+      "npm run lint:style",
+      "prettier --write"
     ]
   },
   "engines": {

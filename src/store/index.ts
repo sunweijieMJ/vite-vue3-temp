@@ -4,14 +4,14 @@ import basic from './modules/basic';
 import { BasicState } from './types';
 
 export type State = {
-    basic: BasicState
-}
+  basic: BasicState;
+};
 
 const store: Store<State> = createStore({
-    plugins: [vuexPersistedstate()],
-    modules: {
-        basic,
-    },
+  plugins: [vuexPersistedstate()],
+  modules: {
+    basic,
+  },
 });
 
 export default store;

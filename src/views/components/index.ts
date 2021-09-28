@@ -1,5 +1,3 @@
 import TaskList from './TaskList.vue';
 
-export {
-    TaskList,
-};
+export { TaskList };

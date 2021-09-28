@@ -1,6 +1,13 @@
 // 引入tools下的过滤函数
 import {
-    multiply, divide, priceFilter, textTohtml, handleImage, isAllow, decimalFormat, dateFormat,
+  multiply,
+  divide,
+  priceFilter,
+  textTohtml,
+  handleImage,
+  isAllow,
+  decimalFormat,
+  dateFormat,
 } from './tools';
 
 export enum FilterKey {
@@ -17,18 +24,18 @@ export enum FilterKey {
 class FunctionType extends Function {}
 
 export type FilterType = {
-    [key in FilterKey]: FunctionType;
-}
+  [key in FilterKey]: FunctionType;
+};
 
 const filters: FilterType = {
-    multiply,
-    divide,
-    priceFilter,
-    textTohtml,
-    handleImage,
-    isAllow,
-    decimalFormat,
-    dateFormat,
+  multiply,
+  divide,
+  priceFilter,
+  textTohtml,
+  handleImage,
+  isAllow,
+  decimalFormat,
+  dateFormat,
 };
 
 export default filters;

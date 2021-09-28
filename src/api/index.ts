@@ -1,5 +1,3 @@
 import basicApi from './modules/basic';
 
-export {
-    basicApi,
-};
+export { basicApi };

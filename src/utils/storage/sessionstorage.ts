@@ -5,17 +5,17 @@
 import { StorageType } from './index';
 
 class SessionStorageAPI implements StorageType {
-    set(key: string, value: string): void {
-        return sessionStorage.setItem(key, value);
-    }
+  set(key: string, value: string): void {
+    return sessionStorage.setItem(key, value);
+  }
 
-    get(key: string): string {
-        return sessionStorage.getItem(key) ?? '';
-    }
+  get(key: string): string {
+    return sessionStorage.getItem(key) ?? '';
+  }
 
-    remove(key: string): void {
-        return sessionStorage.removeItem(key);
-    }
+  remove(key: string): void {
+    return sessionStorage.removeItem(key);
+  }
 }
 
 export default SessionStorageAPI;

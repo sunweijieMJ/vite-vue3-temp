@@ -4,10 +4,4 @@ import LayoutNav from './LayoutNav.vue';
 import SidebarItem from './SidebarItem.vue';
 import SidebarLink from './SidebarLink.vue';
 
-export {
-    LayoutAside,
-    LayoutHeader,
-    LayoutNav,
-    SidebarItem,
-    SidebarLink,
-};
+export { LayoutAside, LayoutHeader, LayoutNav, SidebarItem, SidebarLink };

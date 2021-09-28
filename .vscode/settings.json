@@ -33,12 +33,12 @@
   "workbench.iconTheme": "vscode-icons",
   "diffEditor.ignoreTrimWhitespace": false,
   "terminal.integrated.rendererType": "dom",
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll.eslint": false,
-  //   "source.fixAll.stylelint": false
-  // },
-  // "editor.formatOnSave": true,
-  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": false,
+    "source.fixAll.stylelint": false
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "files.exclude": {
     // "dist": true,
     "src/**/*.wxss": true

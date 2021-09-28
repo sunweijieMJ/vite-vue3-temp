@@ -11,7 +11,7 @@ module.exports = {
         'airbnb-base',
         'plugin:@typescript-eslint/recommended',
         'plugin:vue/vue3-recommended',
-        // 'plugin:prettier/recommended',
+        'plugin:prettier/recommended',
         // 'plugin:react/recommended',
     ],
     parser: "vue-eslint-parser",
@@ -47,21 +47,13 @@ module.exports = {
                     }
                 ]
             },
-        },
-        {
-            files: ['*.vue'],
-            rules: {
-                'vue/html-indent': ['off'],
-                'vue/max-attributes-per-line': ['off'],
-                'vue/singleline-html-element-content-newline': ['off'],
-            },
         }
     ],
     settings: {
         'import/resolver': {
-            // 'node': {
-            //     'extensions': ['.js', '.jsx', '.ts', '.tsx']
-            // },
+            'node': {
+                'extensions': ['.js', '.jsx', '.ts', '.tsx']
+            },
             alias: {
                 map: [
                     ['@', './src'],
@@ -69,25 +61,21 @@ module.exports = {
                 extensions: ['.js', '.jsx', '.ts', 'tsx']
             }
         },
-    //     'react': {
-    //         'version': 'detect' // 针对react项目开启
-    //     }
+        'react': {
+            'version': 'detect' // 针对react项目开启
+        }
     },
     rules: {
-        "prettier/prettier": "off",
-
         'no-console': process.env.NODE_ENV === 'production' ? ['error', { allow: ['warn', 'error'] }] : 'off', // 禁用 console
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 禁用 debugger
         '@typescript-eslint/no-var-requires': 'off', // require 报错
         'import/no-extraneous-dependencies': 'off', // 引入path报错
 
-        'indent': ['error', 4, { SwitchCase: 1 }], // 两个空格缩进
         'no-shadow': 'off', // 禁止变量声明覆盖外层作用域的变量
         'no-param-reassign': 'off', // 禁止对函数参数再赋值
         'no-plusplus': 'off', // 禁止使用一元表达式
         'no-bitwise': 'off', // 禁止使用按位操作符
         'no-multi-assign': 'off', // 禁止连续赋值
-        'max-len': 'off', // 强制行的最大长度
         'func-names': 'off', // 要求或禁止使用命名的 function 表达式
         'class-methods-use-this': 'off', // 强制类方法使用 this
         'import/prefer-default-export': 'off', // 需要有默认导出

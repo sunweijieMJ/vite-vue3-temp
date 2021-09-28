@@ -9,25 +9,25 @@ import CustomToast from './custom-toast/toast';
 import CustomDrawer from './custom-drawer.vue';
 
 const install = (app: App): void => {
-    app.component('CustomImage', CustomImage);
-    app.component('CustomChart', CustomChart);
-    app.component('CustomDialog', CustomDialog);
-    app.component('CustomQuery', CustomQuery);
-    app.component('CustomPagination', CustomPagination);
-    app.component('CustomScroll', CustomScroll);
-    app.component('CustomDrawer', CustomDrawer);
+  app.component('CustomImage', CustomImage);
+  app.component('CustomChart', CustomChart);
+  app.component('CustomDialog', CustomDialog);
+  app.component('CustomQuery', CustomQuery);
+  app.component('CustomPagination', CustomPagination);
+  app.component('CustomScroll', CustomScroll);
+  app.component('CustomDrawer', CustomDrawer);
 
-    // CustomToast
-    app.provide('$toast', CustomToast);
+  // CustomToast
+  app.provide('$toast', CustomToast);
 };
 
 export {
-    install,
-    CustomImage,
-    CustomChart,
-    CustomDialog,
-    CustomQuery,
-    CustomPagination,
-    CustomScroll,
-    CustomToast,
+  install,
+  CustomImage,
+  CustomChart,
+  CustomDialog,
+  CustomQuery,
+  CustomPagination,
+  CustomScroll,
+  CustomToast,
 };

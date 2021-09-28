@@ -14,20 +14,20 @@ import './router/intercept';
 
 // 扩展window类型
 declare global {
-    interface Window {
-        env: {
-            VITE_BASEURL: string;
-            VITE_WEBURL: string;
-            VITE_MICROAPPS: string[];
-        };
-    }
+  interface Window {
+    env: {
+      VITE_BASEURL: string;
+      VITE_WEBURL: string;
+      VITE_MICROAPPS: string[];
+    };
+  }
 }
 
 // 对vue进行类型补充说明
 declare module '@vue/runtime-core' {
-    interface ComponentCustomProperties {
-        $filters: FilterType;
-    }
+  interface ComponentCustomProperties {
+    $filters: FilterType;
+  }
 }
 
 const app = createApp(App);
