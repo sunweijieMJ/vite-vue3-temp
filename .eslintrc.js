@@ -68,6 +68,7 @@ module.exports = {
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? ['error', { allow: ['warn', 'error'] }] : 'off', // 禁用 console
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off', // 禁用 debugger
+
         '@typescript-eslint/no-var-requires': 'off', // require 报错
         'import/no-extraneous-dependencies': 'off', // 引入path报错
 

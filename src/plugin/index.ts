@@ -39,7 +39,7 @@ const install = (app: App): void => {
 
   // 注册element
   element.components.forEach((component) => {
-    if (component.name) app.component(component.name as string, component);
+    if (component.name) app.component(component.name, component);
   });
   Object.values(element.plugins).forEach((plugin) => {
     app.use(plugin);

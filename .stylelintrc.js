@@ -4,7 +4,6 @@ module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-sass-guidelines'],
   plugins: ['stylelint-order'],
   rules: {
-    indentation: 2, // 指定缩进
     'max-nesting-depth': 10, // 限制嵌套深度
     'selector-max-id': 6, // 限制选择器中 ID 选择器的数量
     'selector-max-compound-selectors': 10, // 限制选择器中复合选择器的数量

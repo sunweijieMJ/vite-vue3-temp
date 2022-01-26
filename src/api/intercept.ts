@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, Method, Canceler } from 'axios';
 import { ElLoading } from 'element-plus';
-import { ILoadingInstance } from 'element-plus/lib/el-loading/src/loading.type.d';
+import { LoadingInstance } from 'element-plus/lib/components/loading/src/loading';
 import storage from '@/utils/storage';
 import store from '@/store';
 import { i18n } from '@/plugin';
@@ -23,7 +23,7 @@ const instance = axios.create({
   timeout: 100000,
   responseType: 'json',
 });
-let loadingInstance: ILoadingInstance;
+let loadingInstance: LoadingInstance;
 
 // 移除重复请求
 const removePending = (config: AxiosRequestConfig) => {

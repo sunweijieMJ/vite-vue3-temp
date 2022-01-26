@@ -1,13 +1,14 @@
 /** 重置message，防止重复点击重复弹出message弹框 */
 import { ElMessage } from 'element-plus';
 import {
-  IMessageHandle,
-  IMessageOptions,
-  MessageType,
-} from 'element-plus/lib/el-message/src/types.d';
+  MessageHandle,
+  MessageParams,
+} from 'element-plus/lib/components/message/src/message';
 
-let messageInstance: IMessageHandle;
-const customMessage: any = (options: IMessageOptions) => {
+type MessageType = 'success' | 'warning' | 'info' | 'error';
+
+let messageInstance: MessageHandle;
+const customMessage: any = (options: MessageParams) => {
   if (messageInstance) {
     messageInstance.close();
   }
@@ -15,7 +16,7 @@ const customMessage: any = (options: IMessageOptions) => {
 };
 const messageType: MessageType[] = ['error', 'success', 'info', 'warning'];
 messageType.forEach((item) => {
-  customMessage[item] = (options: IMessageOptions) => {
+  customMessage[item] = (options: MessageParams) => {
     if (typeof options === 'string') {
       options = {
         message: options,

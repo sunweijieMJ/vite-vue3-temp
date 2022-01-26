@@ -105,6 +105,7 @@ export default ({ mode }: { mode: string }): unknown => {
               'element'
             );
             if (chunkMap.get(true)) return chunkMap.get(true);
+            return null;
           },
         },
       },
